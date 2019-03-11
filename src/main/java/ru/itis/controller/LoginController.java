@@ -19,7 +19,7 @@ public class LoginController implements Controller {
     @Autowired
     private UsersService usersService;
     @Autowired
-    private LoginService service;
+    private LoginService loginService;
     @Autowired
     private AuthService authService;
 
@@ -39,7 +39,7 @@ public class LoginController implements Controller {
                     .password(password)
                     .build();
 
-            Optional<String> optionalCookieValue = service.login(loginForm);
+            Optional<String> optionalCookieValue = loginService.login(loginForm);
 
 
             if (optionalCookieValue.isPresent()) {

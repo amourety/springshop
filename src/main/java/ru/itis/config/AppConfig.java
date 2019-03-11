@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import ru.itis.controller.LoginController;
 import ru.itis.controller.RegistrationController;
+import ru.itis.services.*;
 
 import javax.sql.DataSource;
 
@@ -78,6 +79,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public Controller loginController(){
         return new LoginController();
     }
+
     @Bean(name = "/registration")
     public RegistrationController registrationController(){
         return new RegistrationController();
