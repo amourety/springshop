@@ -74,7 +74,6 @@ public class UsersServiceImpl implements UsersService {
                 }
                 else return null;
             }
-            else return null;
         }
         return null;
     }
