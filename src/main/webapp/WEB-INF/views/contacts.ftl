@@ -8,16 +8,16 @@
           type="image/x-icon">
     <meta charset="UTF-8">
     <title>Electro Boom</title>
-    <script src ="js/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
-    <script src ="js/jquery-ui-1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src ="js/bootstrap/bootstrap.min.js"></script>
-    <script src="js/adding.js"></script>
-    <script src="js/deleting.js"></script>
-    <script src ="js/getData.js"></script>
-    <script src ="js/renderAjax.js"></script>
+    <script src ="/resources/js/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src ="/resources/js/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/js/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <script src ="/resources/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/resources/js/adding.js"></script>
+    <script src="/resources/js/deleting.js"></script>
+    <script src ="/resources/js/getData.js"></script>
+    <script src ="/resources/js/renderAjax.js"></script>
 </head>
 <#if user ??>
     <body onload="renderAjax(); renderAnswers(); return false;">

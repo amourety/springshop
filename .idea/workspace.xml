@@ -6,9 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89897351-2d2c-40f5-8074-62998822e0f6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itis/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itis/config/AppConfig.java" afterDir="false" />
-    </list>
+    <list default="true" id="89897351-2d2c-40f5-8074-62998822e0f6" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -168,7 +166,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/itis/config/AppConfig.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="378">
-              <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
+              <caret line="72" selection-start-line="72" selection-end-line="72" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2956#2957#0" expanded="true" />
@@ -473,6 +471,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springshop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -716,7 +722,7 @@
       <option name="presentableId" value="Default" />
       <updated>1551776390307</updated>
       <workItem from="1551776399512" duration="15113000" />
-      <workItem from="1552302597760" duration="2221000" />
+      <workItem from="1552302597760" duration="2417000" />
     </task>
     <task id="LOCAL-00001" summary="reworking">
       <created>1552304038931</created>
@@ -729,11 +735,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17334000" />
+    <option name="totallyTimeSpent" value="17530000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8885246" visible="true" weight="0.25340393" />
       <window_info id="Structure" order="1" sideWeight="0.30806845" side_tool="true" weight="0.24962178" />
@@ -1178,7 +1183,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/itis/config/AppConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
-          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2956#2957#0" expanded="true" />

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
-    <script src ="js/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
-    <script src ="js/jquery-ui-1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src ="js/admincommand.js"></script>
-    <script src ="../../../../../../../Users/amour/Desktop/Learning/projectmagazine/src/main/webapp/js/bootstrap/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <script src ="/resources/js/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src ="/resources/js/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/js/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <script src ="/resources/js/admincommand.js"></script>
+    <script src ="/resources/js/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body onload = "getMessages()">
 <footer class="py-5 bg-light">
