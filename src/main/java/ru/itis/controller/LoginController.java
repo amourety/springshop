@@ -30,7 +30,7 @@ public class LoginController implements Controller {
             modelAndView.setViewName("login");
             return modelAndView;
         }
-        if(req.getMethod().equals("POST")){
+        if (req.getMethod().equals("POST")) {
             String name = req.getParameter("name");
             String password = req.getParameter("password");
 
@@ -49,11 +49,10 @@ public class LoginController implements Controller {
                 String role = "";
                 try {
                     role = usersService.getRoleByUser(usersService.find(auth.getUser().getId())).getName();
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("пользователя нет");
                 }
-                if(role.equals("admin")){
+                if (role.equals("admin")) {
                     res.setStatus(201);
                     res.sendRedirect("/admin");
                 } else {

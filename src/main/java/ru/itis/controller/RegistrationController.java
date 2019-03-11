@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
 public class RegistrationController implements Controller {
+
     @Autowired
     private BCryptPasswordEncoder encoder;
 
@@ -30,7 +31,7 @@ public class RegistrationController implements Controller {
             modelAndView.setViewName("registration");
             return modelAndView;
         }
-        if(request.getMethod().equals("POST")){
+        if (request.getMethod().equals("POST")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
@@ -45,15 +46,14 @@ public class RegistrationController implements Controller {
                     first_name(first_name).
                     surname(surname).
                     build();
-            if(usersService.findByName(username) == null){
+            if (usersService.findByName(username) == null) {
                 usersService.addUser(userForm);
                 String resultJson = mapper.writeValueAsString(1);
                 response.setStatus(200);
                 response.setContentType("application/json");
                 PrintWriter writer = response.getWriter();
                 writer.write(resultJson);
-            }
-            else {
+            } else {
                 String resultJson = mapper.writeValueAsString(0);
                 response.setStatus(200);
                 response.setContentType("application/json");
