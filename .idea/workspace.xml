@@ -102,9 +102,9 @@
         <counts>
           <entry key="FTL" value="34" />
           <entry key="HTML" value="15" />
-          <entry key="JAVA" value="1526" />
+          <entry key="JAVA" value="1603" />
           <entry key="JSP" value="31" />
-          <entry key="PLAIN_TEXT" value="68" />
+          <entry key="PLAIN_TEXT" value="79" />
           <entry key="Properties" value="20" />
           <entry key="XML" value="210" />
         </counts>
@@ -128,11 +128,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/itis/controller/RegistrationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="29" column="42" selection-start-line="29" selection-end-line="30" />
+            <state relative-caret-position="459">
+              <caret line="27" column="48" lean-forward="true" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -180,11 +180,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/itis/controller/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="32" column="41" lean-forward="true" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+            <state relative-caret-position="-271">
+              <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -266,7 +266,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/registration.ftl" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/ru/itis/services/UsersService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ru/itis/controller/RegistrationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ru/itis/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/adminpanel.ftl" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/contacts.ftl" />
@@ -275,6 +274,7 @@
         <option value="$PROJECT_DIR$/src/main/java/ru/itis/servlets/MainServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/ru/itis/servlets/AdminServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/ru/itis/config/AppConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ru/itis/controller/RegistrationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ru/itis/controller/MainController.java" />
       </list>
     </option>
@@ -472,7 +472,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552306715054" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552307007481" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Learning/projectmagazine" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -694,7 +694,7 @@
       <option name="presentableId" value="Default" />
       <updated>1551776390307</updated>
       <workItem from="1551776399512" duration="15113000" />
-      <workItem from="1552302597760" duration="3755000" />
+      <workItem from="1552302597760" duration="4018000" />
     </task>
     <task id="LOCAL-00001" summary="reworking">
       <created>1552304038931</created>
@@ -724,15 +724,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552306176093</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="rework main controller">
+      <created>1552306783492</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1552306783492</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18868000" />
+    <option name="totallyTimeSpent" value="19131000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8881356" visible="true" weight="0.25340393" />
       <window_info id="Structure" order="1" sideWeight="0.30806845" side_tool="true" weight="0.24962178" />
@@ -790,7 +796,8 @@
     <MESSAGE value="add ftl pages" />
     <MESSAGE value="add ftl pages 2" />
     <MESSAGE value="add main controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="add main controller" />
+    <MESSAGE value="rework main controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="rework main controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -802,14 +809,6 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/itis/controller/MainController.java</url>
-          <line>29</line>
-          <properties class="ru.itis.controller.MainController" method="handleRequest">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1162,16 +1161,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ru/itis/controller/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="32" column="41" lean-forward="true" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1598">
@@ -1181,8 +1170,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/itis/controller/RegistrationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="29" column="42" selection-start-line="29" selection-end-line="30" />
+        <state relative-caret-position="459">
+          <caret line="27" column="48" lean-forward="true" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ru/itis/controller/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-271">
+          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

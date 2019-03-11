@@ -137,7 +137,7 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="images/post6.jpg"></a></div>
+                                                      src="/resources/images/post6.jpg"></a></div>
                     <div class="info">
                         <a>Laptop 7</a>
                         <span id="special">NEW!</span>
@@ -148,7 +148,7 @@
                 </li>
                 <li class="list-group-item">
                     <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="images/post5.jpg"></a></div>
+                                                      src="/resources/images/post5.jpg"></a></div>
                     <div class="info">
                         <a>Laptop 8</a>
                         <div class="price">
@@ -159,7 +159,7 @@
                 </li>
                 <li class="list-group-item">
                     <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="images/post4.jpg"></a></div>
+                                                      src="/resources/images/post4.jpg"></a></div>
                     <div class="info">
                         <a>Laptop 9</a>
                         <span id="special">NEW!</span>
@@ -170,7 +170,7 @@
                 </li>
                 <li class="list-group-item">
                     <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="images/post3.jpg"></a></div>
+                                                      src="/resources/images/post3.jpg"></a></div>
                     <div class="info">
                         <a>Laptop 10</a>
                         <div class="price">
@@ -180,7 +180,7 @@
                 </li>
                 <li class="list-group-item">
                     <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="images/post2.jpg"></a></div>
+                                                      src="/resources/images/post2.jpg"></a></div>
                     <div class="info">
                         <a>Laptop 11</a>
                         <div class="price">
@@ -190,7 +190,7 @@
                 </li>
                 <li class="list-group-item">
                     <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="images/post1.jpg"></a></div>
+                                                      src="/resources/images/post1.jpg"></a></div>
                     <div class="info">
                         <a>Laptop 12</a>
                         <span id="special">NEW!</span>
