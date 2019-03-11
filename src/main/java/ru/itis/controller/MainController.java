@@ -40,6 +40,7 @@ public class MainController implements Controller {
             } catch (Exception e){
                 user = null;
             }
+            System.out.println(user);
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.addObject("user", user);
             modelAndView.addObject("products",products);
