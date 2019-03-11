@@ -87,6 +87,4 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return new RegistrationController();
     }
 
-    @Bean(name = "/main")
-    public MainController mainController(){return new MainController();}
 }

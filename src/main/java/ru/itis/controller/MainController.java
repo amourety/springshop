@@ -1,9 +1,14 @@
 package ru.itis.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
+
 import ru.itis.models.Basket;
 import ru.itis.models.Product;
 import ru.itis.models.User;
@@ -12,10 +17,12 @@ import ru.itis.services.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class MainController implements Controller {
+@Controller
+public class MainController {
 
     @Autowired
     private LoginService loginService;
@@ -29,40 +36,42 @@ public class MainController implements Controller {
     private AuthService authService;
 
     private ObjectMapper mapper = new ObjectMapper();
-    @Override
-    public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        if (req.getMethod().equals("GET")) {
-            List<Product> products = productService.findAll();
-            User user;
-            try {
-                user = usersService.find(usersService.getCurrentUser(req.getCookies()).getId());
-                user.setRole(usersService.getRoleByUser(user));
-            } catch (Exception e){
-                user = null;
-            }
-            System.out.println(user);
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("user", user);
-            modelAndView.addObject("products",products);
-            modelAndView.setViewName("index");
-            return modelAndView;
+
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public ModelAndView getPage(HttpServletRequest req, HttpServletResponse res){
+        List<Product> products = productService.findAll();
+        User user;
+        try {
+            user = usersService.find(usersService.getCurrentUser(req.getCookies()).getId());
+            user.setRole(usersService.getRoleByUser(user));
+        } catch (Exception e){
+            user = null;
         }
-        if(req.getMethod().equals("POST")) {
-            Cookie[] cookies = req.getCookies();
-            if (cookies == null) {
-                cookies = new Cookie[0];
-            }
-            Basket basket;
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("products",products);
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
 
-            String action = req.getParameter("action");
+    @RequestMapping(value = "/main", method = RequestMethod.POST)
+    public ModelAndView getPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        Cookie[] cookies = req.getCookies();
+        if (cookies == null) {
+            cookies = new Cookie[0];
+        }
+        Basket basket;
 
-            System.out.println(req.getParameter("action") + " " + req.getParameter("product_id"));
-            if(action.equals("exit")){
+        String action = req.getParameter("action");
+
+        System.out.println(req.getParameter("action") + " " + req.getParameter("product_id"));
+        switch (action){
+            case "exit":
                 System.out.println("exit");
                 authService.deleteCookieByUserId(usersService.find(usersService.getCurrentUser(req.getCookies()).getId()));
                 res.setStatus(200);
-            }
-            if(action.equals("delete")){
+                break;
+            case "delete":
                 Long productId = Long.valueOf(req.getParameter("product_id"));
                 basket = shopService.delete(productId,cookies,loginService);
                 res.setStatus(200);
@@ -70,39 +79,39 @@ public class MainController implements Controller {
                 String resultJson = mapper.writeValueAsString(basket.getProducts());
                 PrintWriter writer = res.getWriter();
                 writer.write(resultJson);
-            }
-            if(action.equals("buy")) {
-                Long productId = Long.valueOf(req.getParameter("product_id"));
+                break;
+            case "buy":
+                productId = Long.valueOf(req.getParameter("product_id"));
                 basket = shopService.buy(productId, cookies, loginService);
-                String resultJson = mapper.writeValueAsString(basket.getProducts());
+                resultJson = mapper.writeValueAsString(basket.getProducts());
                 System.out.println(resultJson);
                 res.setStatus(200);
                 res.setContentType("application/json");
-                PrintWriter writer = res.getWriter();
+                writer = res.getWriter();
                 writer.write(resultJson);
-            }
-            if(action.equals("deleteAll")) {
+                break;
+            case "deleteAll":
                 basket = shopService.deleteAll(cookies, loginService);
-                String resultJson = mapper.writeValueAsString(basket.getProducts());
+                resultJson = mapper.writeValueAsString(basket.getProducts());
                 res.setStatus(200);
                 res.setContentType("application/json");
-                PrintWriter writer = res.getWriter();
+                writer = res.getWriter();
                 writer.write(resultJson);
-            }
-            if(action.equals("addOrder")) {
+                break;
+            case "addOrder":
                 shopService.addOrder(cookies,loginService);
                 basket = shopService.deleteAll(cookies, loginService);
-                String resultJson = mapper.writeValueAsString(basket);
+                resultJson = mapper.writeValueAsString(basket);
                 res.setStatus(200);
                 res.setContentType("application/json");
-                PrintWriter writer = res.getWriter();
+                writer = res.getWriter();
                 writer.write(resultJson);
-            }
-            if(action.equals("deleteOrder")){
+                break;
+            case "deleteOrder":
                 Long orderId = Long.valueOf(req.getParameter("order_id"));
                 shopService.deleteOrder(orderId);
                 res.setStatus(200);
-            }
+                break;
         }
         return null;
     }
