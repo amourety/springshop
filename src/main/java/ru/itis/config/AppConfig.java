@@ -70,7 +70,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public JdbcTemplate jdbcTemplate(){
         return new JdbcTemplate(dataSource());
     }
-    
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
