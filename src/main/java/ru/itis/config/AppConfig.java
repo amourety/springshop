@@ -76,15 +76,4 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
-    @Bean(name = "/login")
-    public Controller loginController(){
-        return new LoginController();
-    }
-
-    @Bean(name = "/registration")
-    public RegistrationController registrationController(){
-        return new RegistrationController();
-    }
-
 }

@@ -22,6 +22,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/main")
 public class MainController {
 
     @Autowired
@@ -37,7 +38,7 @@ public class MainController {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getPage(HttpServletRequest req, HttpServletResponse res){
         List<Product> products = productService.findAll();
         User user;
@@ -54,7 +55,7 @@ public class MainController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/main", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ModelAndView getPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         Cookie[] cookies = req.getCookies();
         if (cookies == null) {
@@ -69,6 +70,7 @@ public class MainController {
             case "exit":
                 System.out.println("exit");
                 authService.deleteCookieByUserId(usersService.find(usersService.getCurrentUser(req.getCookies()).getId()));
+                req.getSession().setAttribute("user", null);
                 res.setStatus(200);
                 break;
             case "delete":

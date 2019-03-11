@@ -1,10 +1,14 @@
 package ru.itis.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
 import ru.itis.forms.LoginForm;
 import ru.itis.models.Auth;
+import ru.itis.models.User;
 import ru.itis.services.AuthService;
 import ru.itis.services.LoginService;
 import ru.itis.services.UsersService;
@@ -14,7 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
-public class LoginController implements Controller {
+@Controller
+@RequestMapping(value = "/login")
+public class LoginController {
 
     @Autowired
     private UsersService usersService;
@@ -23,48 +29,42 @@ public class LoginController implements Controller {
     @Autowired
     private AuthService authService;
 
-    @Override
-    public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        if (req.getMethod().equals("GET")) {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("login");
-            return modelAndView;
-        }
-        if(req.getMethod().equals("POST")){
-            String name = req.getParameter("name");
-            String password = req.getParameter("password");
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView getPage(){
+        return new ModelAndView("login");
+    }
 
-            LoginForm loginForm = LoginForm.builder()
-                    .name(name)
-                    .password(password)
-                    .build();
+    @RequestMapping(method = RequestMethod.POST)
+    public String getPost(HttpServletRequest req, HttpServletResponse res){
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
 
-            Optional<String> optionalCookieValue = loginService.login(loginForm);
-
-
-            if (optionalCookieValue.isPresent()) {
-                Cookie cookie = new Cookie("auth", optionalCookieValue.get());
-                res.addCookie(cookie);
-                Auth auth = authService.findByCookieValue(cookie.getValue());
-                String role = "";
-                try {
-                    role = usersService.getRoleByUser(usersService.find(auth.getUser().getId())).getName();
-                }
-                catch (Exception e){
-                    System.out.println("пользователя нет");
-                }
-                if(role.equals("admin")){
-                    res.setStatus(201);
-                    res.sendRedirect("/admin");
-                } else {
-                    res.setStatus(201);
-                    res.sendRedirect("/main");
-                }
-            } else {
-                res.setStatus(200);
-                res.sendRedirect("/login");
+        LoginForm loginForm = LoginForm.builder()
+                .name(name)
+                .password(password)
+                .build();
+        User user = User.builder().name(name).build();
+        req.getSession().setAttribute("user", user);
+        Optional<String> optionalCookieValue = loginService.login(loginForm);
+        System.out.println(loginForm);
+        if (optionalCookieValue.isPresent()) {
+            Cookie cookie = new Cookie("auth", optionalCookieValue.get());
+            res.addCookie(cookie);
+            Auth auth = authService.findByCookieValue(cookie.getValue());
+            String role = "";
+            try {
+                role = usersService.getRoleByUser(usersService.find(auth.getUser().getId())).getName();
             }
+            catch (Exception e){
+                System.out.println("пользователя нет");
+            }
+            if(role.equals("admin")){
+                return "redirect:/admin";
+            } else {
+                return "redirect:/main";
+            }
+        } else {
+            return "redirect:/login";
         }
-        return null;
     }
 }
