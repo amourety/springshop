@@ -66,23 +66,24 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         dataSource.setDriverClassName(environment.getProperty("db.driverClassName"));
         return dataSource;
     }
+
     @Bean
-    public JdbcTemplate jdbcTemplate(){
+    public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean(name = "/login")
-    public Controller loginController(){
+    public Controller loginController() {
         return new LoginController();
     }
 
     @Bean(name = "/registration")
-    public RegistrationController registrationController(){
+    public RegistrationController registrationController() {
         return new RegistrationController();
     }
 }
