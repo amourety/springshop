@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 import ru.itis.models.Basket;
+import ru.itis.models.Product;
+import ru.itis.models.User;
 import ru.itis.services.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.util.List;
 
 public class MainController implements Controller {
 
@@ -29,7 +32,17 @@ public class MainController implements Controller {
     @Override
     public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse res) throws Exception {
         if (req.getMethod().equals("GET")) {
+            List<Product> products = productService.findAll();
+            User user;
+            try {
+                user = usersService.find(usersService.getCurrentUser(req.getCookies()).getId());
+                user.setRole(usersService.getRoleByUser(user));
+            } catch (Exception e){
+                user = null;
+            }
             ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("user", user);
+            modelAndView.addObject("products",products);
             modelAndView.setViewName("index");
             return modelAndView;
         }
