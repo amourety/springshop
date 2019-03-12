@@ -102,7 +102,7 @@
                         <div class="container-fluid" id="catalog">
                             <div class="row">
                             <#list products as product>
-                                <div class="col-md-4 col-sm-6 col-lg-4">
+                                <div class="col-md-4 col-sm-6 col-lg-4" href="/products/${product.id}">
                                     <div class="item">
                                         <img class="img-responsive" src="${product.img}">
                                         <div class="item-dtls">
