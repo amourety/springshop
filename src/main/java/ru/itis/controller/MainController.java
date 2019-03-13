@@ -51,6 +51,7 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", user);
         modelAndView.addObject("products",products);
+        modelAndView.addObject("randomproducts", productService.getRandomProducts());
         modelAndView.setViewName("index");
         return modelAndView;
     }

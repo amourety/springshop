@@ -116,6 +116,7 @@
                                             <a class="btn" href=""
                                                onclick="doBuying(${product.id},${product.price}); return false;"> Add to
                                                 cart</a>
+                                            <a class="btn" href="/products/${product.id}"> Info</a>
                                         </div>
                                         </#if>
                                     </div>
@@ -132,73 +133,23 @@
                 <div style="height: 70px;"></div>
 
                 <h2 id="special">
-                Top products
+                Other products
             </h2></div>
             <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="/resources/images/post6.jpg"></a></div>
-                    <div class="info">
-                        <a>Laptop 7</a>
-                        <span id="special">NEW!</span>
-                        <div class="price">
-                            <span id="special">600$</span>
+                <#list randomproducts as product>
+                    <li class="list-group-item">
+                        <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
+                                                          src="/${product.img}"></a></div>
+                        <div class="info">
+                            <a>${product.name}</a>
+                            <span id="special">NEW!</span>
+                            <div class="price">
+                                <span id="special">${product.price}$</span>
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="/resources/images/post5.jpg"></a></div>
-                    <div class="info">
-                        <a>Laptop 8</a>
-                        <div class="price">
-                            <span id="special">500$</span>
-
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="/resources/images/post4.jpg"></a></div>
-                    <div class="info">
-                        <a>Laptop 9</a>
-                        <span id="special">NEW!</span>
-                        <div class="price">
-                            <span id="special">700$</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="/resources/images/post3.jpg"></a></div>
-                    <div class="info">
-                        <a>Laptop 10</a>
-                        <div class="price">
-                            <span id="special">714$</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="/resources/images/post2.jpg"></a></div>
-                    <div class="info">
-                        <a>Laptop 11</a>
-                        <div class="price">
-                            <span id="special">100$</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="/resources/images/post1.jpg"></a></div>
-                    <div class="info">
-                        <a>Laptop 12</a>
-                        <span id="special">NEW!</span>
-                        <div class="price">
-                            <span id="special">190$</span>
-                        </div>
-                    </div>
-                </li>
+                        <a class="btn-black" href="/products/${product.id}" style="color: black;">Info</a>
+                    </li>
+                </#list>
             </ul>
         </div>
     </div>

@@ -26,4 +26,14 @@ public class ProductServiceImpl implements ProductService{
         productsRepository.save(model);
     }
 
+    @Override
+    public Product getById(Long id) {
+        return productsRepository.find(id);
+    }
+
+    @Override
+    public List<Product> getRandomProducts() {
+        return productsRepository.getRandomProducts();
+    }
+
 }

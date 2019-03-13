@@ -100,4 +100,11 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
         jdbcTemplate.update(SQL_DELETE1,id);
         jdbcTemplate.update(SQL_DELETE2,id);
     }
+
+    @Override
+    public List<Product> getRandomProducts() {
+        //language=SQL
+        String SQL = "SELECT * FROM product ORDER BY random() LIMIT 3;";
+        return jdbcTemplate.query(SQL, productRowMapper);
+    }
 }

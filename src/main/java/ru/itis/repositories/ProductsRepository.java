@@ -10,4 +10,6 @@ public interface ProductsRepository extends CrudRepository<Product> {
     List<Product> findAllByTitle(String title);
     List<Product> findAllByTitleSearch(String title);
     void deleteById(Long id);
+
+    List<Product> getRandomProducts();
 }

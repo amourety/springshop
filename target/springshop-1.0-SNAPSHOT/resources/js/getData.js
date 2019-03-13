@@ -21,6 +21,7 @@ function search() {
             tableHtml += '</div>';
             tableHtml += '<div class="ecom bg-black">';
             tableHtml +='<a class="btn" href="" onclick="doBuying(' + data[i].id + ',' + data[i].price + '); return false;"> Add to cart</a>';
+            tableHtml +='<a class="btn" href="/products/' + data[i].id + '"> Info</a>';
             tableHtml += '</div>';
             tableHtml += '</div>';
             tableHtml += '</div>';

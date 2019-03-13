@@ -8,4 +8,8 @@ public interface ProductService {
     List<Product> findAll();
     void deleteById(Long id);
     void addProduct(Product model);
+
+    Product getById(Long id);
+
+    List<Product> getRandomProducts();
 }
