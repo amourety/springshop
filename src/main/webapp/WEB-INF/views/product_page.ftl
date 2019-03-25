@@ -96,13 +96,14 @@
                         <div class="list-group-item" style="padding: 5%;">
                             <p style="font-size: 60px; color: #000000; font-weight: bold;"> ${product.name} </p>
                             <img class="img-responsive" src="/${product.img}">
+                            <p style="font-size: 15px;"> ${product.category}</p>
                             <p class="price lblue" id="special"
                                style="font-size: 40px"> ${product.price} $</p>
 
                             <br>
                             <h3>About product</h3>
                             <p style="word-wrap: break-word">
-                                ASDPPDPASPDAPSDPASDASDPSDPASDPSFKAJDSFGDASJFBSADFKASDJFKJSKFJSADFSDAKFSDFSADJFA
+                                ${product.about}
                             </p>
                             <br>
                             <a class="btn" href="" style="color: black"

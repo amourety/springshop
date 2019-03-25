@@ -17,12 +17,15 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     //language=SQL
     private static final String SQL_SEARCH = "select * from product where product.name alike %?";
 
     //language=SQL
     private static final String SQL_SELECT_PRODUCT_BY_ID =
-            "select * from product where id = ?";
+            "select * from product p join category c2 on p.category = c2.id where p.id = ?";
 
     //language=SQL
     private static final String SQL_SELECT_ALL_PRODUCTS =
@@ -30,7 +33,7 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
 
     //language=SQL
     private static final String SQL_INSERT_PRODUCT =
-            "insert into product(name,price,img) values (?,?,?)";
+            "insert into product(name,price,img, category,about) values (?,?,?,?,?)";
 
     //language=SQL
     private static final String SQL_SELECT_BY_NAME =
@@ -48,6 +51,14 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
             .price(resultSet.getString("price"))
             .img(resultSet.getString("img"))
             .build();
+    private RowMapper<Product> productRowMapperCategory = (resultSet, i) -> Product.builder()
+            .id(resultSet.getLong("id"))
+            .name(resultSet.getString("name"))
+            .price(resultSet.getString("price"))
+            .img(resultSet.getString("img"))
+            .category(resultSet.getString("type"))
+            .about(resultSet.getString("about"))
+            .build();
 
     @Override
     public List<Product> findAllByTitleSearch(String title) {
@@ -64,12 +75,12 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
     @Override
     public Product find(Long id) {
         return jdbcTemplate.queryForObject(SQL_SELECT_PRODUCT_BY_ID,
-                productRowMapper, id);
+                productRowMapperCategory, id);
     }
 
     @Override
     public void save(Product model) {
-        jdbcTemplate.update(SQL_INSERT_PRODUCT, model.getName(), model.getPrice(),model.getImg());
+        jdbcTemplate.update(SQL_INSERT_PRODUCT, model.getName(), model.getPrice(),model.getImg(),model.getAbout());
     }
 
 

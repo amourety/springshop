@@ -22,7 +22,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/main")
 public class MainController {
 
     @Autowired
@@ -38,7 +37,13 @@ public class MainController {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String getPage(){
+        return "redirect:/main";
+    }
+
+
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView getPage(HttpServletRequest req, HttpServletResponse res){
         List<Product> products = productService.findAll();
         User user;
@@ -56,7 +61,7 @@ public class MainController {
         return modelAndView;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/main", method = RequestMethod.POST)
     public ModelAndView getPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         Cookie[] cookies = req.getCookies();
         if (cookies == null) {

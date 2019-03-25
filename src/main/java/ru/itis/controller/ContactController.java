@@ -39,19 +39,19 @@ public class ContactController {
     private ObjectMapper mapper = new ObjectMapper();
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getPage(HttpServletRequest req, HttpServletResponse res){
+    public ModelAndView getPage(HttpServletRequest req, HttpServletResponse res) {
         User user;
 
         try {
             user = usersService.find(usersService.getCurrentUser(req.getCookies()).getId());
             user.setRole(usersService.getRoleByUser(user));
-        } catch (Exception e){
+        } catch (Exception e) {
             user = null;
         }
         List<Contact> contacts = contactService.getAnswers(user);
         ModelAndView modelAndView = new ModelAndView("contacts");
         modelAndView.addObject("user", user);
-        modelAndView.addObject("contacts", contacts);
+        modelAndView.addObject("answers", contacts);
         return modelAndView;
     }
 
@@ -64,8 +64,8 @@ public class ContactController {
             cookies = new Cookie[0];
         }
         User currentUser = new User();
-        for(Cookie cookie:cookies){
-            if(cookie.getName().equals("auth")) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("auth")) {
                 Auth auth = authService.findByCookieValue(cookie.getValue());
                 currentUser = usersService.find(auth.getUser().getId());
             }
@@ -74,7 +74,7 @@ public class ContactController {
         String action = request.getParameter("action");
         System.out.println(action);
 
-        if (action.equals("delete")){
+        if (action.equals("delete")) {
             String answer_id = request.getParameter("answer_id");
             Contact contact = Contact.builder().id(Long.valueOf(answer_id)).build();
             contactService.delete(contact);
@@ -86,7 +86,7 @@ public class ContactController {
             PrintWriter writer = response.getWriter();
             writer.write(resultJson);
         }
-        if(action.equals("sending")){
+        if (action.equals("sending")) {
             String name = request.getParameter("name");
             String surname = request.getParameter("surname");
             String email = request.getParameter("email");
@@ -100,13 +100,12 @@ public class ContactController {
                     userid(currentUser.getId()).
                     build();
             contactService.addContact(contactForm);
-            String resultJson = mapper.writeValueAsString(1);
-
-            response.setStatus(200);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter writer = response.getWriter();
-            writer.write(resultJson);
+//            String resultJson = mapper.writeValueAsString("1");
+//            response.setStatus(200);
+//            response.setContentType("application/json");
+//            response.setCharacterEncoding("UTF-8");
+//            PrintWriter writer = response.getWriter();
+//            writer.write(resultJson);
         }
         return new ModelAndView("contacts");
     }

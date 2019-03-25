@@ -3,6 +3,7 @@ package ru.itis.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.itis.models.Product;
+import ru.itis.repositories.CategoryRepository;
 import ru.itis.repositories.ProductsRepository;
 
 import java.util.List;
@@ -11,6 +12,10 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductsRepository productsRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
 
     public List<Product> findAll(){
         return productsRepository.findAll();
@@ -23,6 +28,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void addProduct(Product model){
+        model.setCategory(categoryRepository.getCategoryByString(model.getCategory()));
         productsRepository.save(model);
     }
 

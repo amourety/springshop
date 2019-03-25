@@ -67,7 +67,7 @@ public class AdminController {
             productService.deleteById(productId);
         }
         if (action.equals("addProduct")) {
-            Product product = Product.builder().name(request.getParameter("name")).price(request.getParameter("price")).img(request.getParameter("img")).build();
+            Product product = Product.builder().name(request.getParameter("name")).price(request.getParameter("price")).img(request.getParameter("img")).about(request.getParameter("about")).category(request.getParameter("category")).build();
             productService.addProduct(product);
         }
         if (action.equals("replyMessage")) {
