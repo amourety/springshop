@@ -186,6 +186,7 @@ function addProductIntoList() {
     var img = document.getElementById('addProductImg').value;
     var category = document.getElementById('addProductCategory').value;
     var about = document.getElementById('addProductAbout').value;
+    var check = $("#CategoryCheck").is(':checked');
     $.ajax({
         type: 'POST',
         url: '/admin',
@@ -195,6 +196,7 @@ function addProductIntoList() {
             img: img,
             category: category,
             about: about,
+            check: check,
             action: 'addProduct'
         }
     }).done(function () {

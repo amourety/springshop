@@ -29,11 +29,11 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
 
     //language=SQL
     private static final String SQL_SELECT_ALL_PRODUCTS =
-            "select * from product";
+            "select * from product p order by p.id";
 
     //language=SQL
     private static final String SQL_INSERT_PRODUCT =
-            "insert into product(name,price,img, category,about) values (?,?,?,?,?)";
+            "insert into product(name,price,img, category ,about) values (?,?,?,?,?)";
 
     //language=SQL
     private static final String SQL_SELECT_BY_NAME =
@@ -80,7 +80,7 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
 
     @Override
     public void save(Product model) {
-        jdbcTemplate.update(SQL_INSERT_PRODUCT, model.getName(), model.getPrice(),model.getImg(),model.getAbout());
+        jdbcTemplate.update(SQL_INSERT_PRODUCT, model.getName(), model.getPrice(),model.getImg(),Integer.valueOf(model.getCategory()), model.getAbout());
     }
 
 

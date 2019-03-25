@@ -76,9 +76,17 @@
                                         <input type="text" class="form-control form-control-sm" id="addProductCategory"
                                                placeholder="">
                                     </div>
+                                    <div class="col-sm-10">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="CategoryCheck">
+                                            <label class="custom-control-label" for="CategoryCheck">New
+                                                category?</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="addProductName" class="col-sm-5 col-form-label col-form-label-sm">About products</label>
+                                    <label for="addProductName" class="col-sm-5 col-form-label col-form-label-sm">About
+                                        products</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control form-control-sm" id="addProductAbout"
                                                placeholder="">

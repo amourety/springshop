@@ -68,7 +68,9 @@ public class AdminController {
         }
         if (action.equals("addProduct")) {
             Product product = Product.builder().name(request.getParameter("name")).price(request.getParameter("price")).img(request.getParameter("img")).about(request.getParameter("about")).category(request.getParameter("category")).build();
-            productService.addProduct(product);
+            System.out.println(product);
+            System.out.println(request.getParameter("check"));
+            productService.addProduct(product, request.getParameter("check"));
         }
         if (action.equals("replyMessage")) {
             Long messageId = Long.valueOf(request.getParameter("id_message"));

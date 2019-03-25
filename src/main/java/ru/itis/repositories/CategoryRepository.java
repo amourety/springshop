@@ -1,5 +1,7 @@
 package ru.itis.repositories;
 
-public interface CategoryRepository extends CrudRepository {
+import ru.itis.models.Category;
+
+public interface CategoryRepository extends CrudRepository<Category> {
     String getCategoryByString(String type);
 }

@@ -114,7 +114,7 @@ function getMessages() {
 }
 
 
-
+//TODO
 function getCatalog() {
     $.ajax({
         type: 'GET',
@@ -184,6 +184,9 @@ function addProductIntoList() {
     var name = document.getElementById('addProductName').value;
     var price = document.getElementById('addProductPrice').value;
     var img = document.getElementById('addProductImg').value;
+    var category = document.getElementById('addProductCategory').value;
+    var about = document.getElementById('addProductAbout').value;
+    var check = $("#CategoryCheck").is(':checked');
     $.ajax({
         type: 'POST',
         url: '/admin',
@@ -191,6 +194,9 @@ function addProductIntoList() {
             name: name,
             price: price,
             img: img,
+            category: category,
+            about: about,
+            check: check,
             action: 'addProduct'
         }
     }).done(function () {

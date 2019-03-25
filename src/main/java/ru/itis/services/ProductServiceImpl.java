@@ -2,6 +2,7 @@ package ru.itis.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.itis.models.Category;
 import ru.itis.models.Product;
 import ru.itis.repositories.CategoryRepository;
 import ru.itis.repositories.ProductsRepository;
@@ -27,7 +28,11 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void addProduct(Product model){
+    public void addProduct(Product model, String newCategory){
+        if(newCategory.equals("true")){
+            Category category = Category.builder().type(model.getCategory()).build();
+            categoryRepository.save(category);
+        }
         model.setCategory(categoryRepository.getCategoryByString(model.getCategory()));
         productsRepository.save(model);
     }
