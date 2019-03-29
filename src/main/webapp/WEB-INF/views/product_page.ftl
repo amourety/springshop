@@ -35,7 +35,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/main">Catalog <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/contacts">Contacts</a>
             </li>
             <li class="nav-item">
@@ -89,7 +89,7 @@
             <div style="height: 600px">
                 <div class="raw">
                     <div class="col-lg-10 col-md-12 col-12">
-                        <h1 style="text-align: center;" id ="special">${product.name}
+                        <h1 style="text-align: center;" id="special">${product.name}
                         </h1>
                     </div>
                     <div class="col-lg-10 col-md-12 col-12">
@@ -103,13 +103,53 @@
                             <br>
                             <h3>About product</h3>
                             <p style="word-wrap: break-word">
-                                ${product.about}
+                            ${product.about}
                             </p>
                             <br>
+                             <#if user ??>
                             <a class="btn" href="" style="color: black"
                                onclick="doBuying(${product.id},${product.price}); return false;"> Add to
                                 cart</a>
+                             </#if>
                             <a class="btn" href="/main" style="color: black;">Back to catalog</a>
+                            <a class="btn" onclick="openFeedback()" style="color: black;">Add feedback</a>
+                            <form id="formFeedback" style="display: none;">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Feedback</label>
+                                    <textarea name="text" class="form-control" id="exampleFormControlTextarea1"
+                                              rows="3"></textarea>
+                                </div>
+                    <#if user ??>
+                    <button class="btn btn-lg btn-black btn-block" type="submit"
+                            onclick="sendingFeedback(); return false;">Send
+                    </button>
+                    <#else>
+                    <button class="btn btn-lg btn-primary btn-danger" type="submit" onclick="">Please login first
+                    </button>
+                    </#if></form>
+                            <#--<div class="container" id="answers">-->
+                                <#--<h3> Feedbacks: ${feedbacks?size}  </h3>-->
+                                <#--<ul class="list-group">-->
+                                <#--<#list feedbacks as a>-->
+                    <#--<li class="list-group-item">-->
+                        <#--<div class="alert alert-light" role="alert"><h5> ${a.owner} </h5>-->
+                            <#--<h5 id="special">${a.feedback} </h5>-->
+                        <#--</div>-->
+                    <#--</li>-->
+                <#--</#list>-->
+
+                                <#--</ul>-->
+                            <#--</div>-->
+                            <div class="container" id="answers">
+                                <h3> Feedbacks: 1 </h3>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="alert alert-light" role="alert"><h5> Nastya </h5>
+                                            <h5 id="special"> Normal </h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -122,18 +162,18 @@
                 </h2></div>
             <ul class="list-group">
                 <#list products as product>
-                <li class="list-group-item">
-                    <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                      src="/${product.img}"></a></div>
-                    <div class="info">
-                        <a>${product.name}</a>
-                        <span id="special">NEW!</span>
-                        <div class="price">
-                            <span id="special">${product.price}$</span>
+                    <li class="list-group-item">
+                        <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
+                                                          src="/${product.img}"></a></div>
+                        <div class="info">
+                            <a>${product.name}</a>
+                            <span id="special">NEW!</span>
+                            <div class="price">
+                                <span id="special">${product.price}$</span>
+                            </div>
                         </div>
-                    </div>
-                    <a class="btn-black" href="/products/${product.id}" style="color: black;">Info</a>
-                </li>
+                        <a class="btn-black" href="/products/${product.id}" style="color: black;">Info</a>
+                    </li>
                 </#list>
             </ul>
         </div>

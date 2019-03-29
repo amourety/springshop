@@ -36,6 +36,7 @@ public class ProductController {
         //name of the template is to be changed when we make it
         ModelAndView modelAndView = new ModelAndView("product_page");
         System.out.println(product);
+        modelAndView.addObject("feedbacks",null);
         modelAndView.addObject("products",productList);
         modelAndView.addObject("product", product);
         modelAndView.addObject("user", user);

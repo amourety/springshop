@@ -118,8 +118,8 @@
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2019-03-25.14:35:46.151</IntrospectionTimestamp>
-      <IntrospectionStateNumber>1315408</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2019-03-28.14:44:49.767</IntrospectionTimestamp>
+      <IntrospectionStateNumber>1315421</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -181,16 +181,7 @@
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="32" parent="23" name="category_id_seq">
-      <ObjectId>74301</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>1315397</StateNumber>
-      <SequenceIdentity>1..2147483647</SequenceIdentity>
-      <BelongsToColumn>1</BelongsToColumn>
-      <CacheSize>1</CacheSize>
-      <DataType>integer</DataType>
-    </sequence>
-    <sequence id="33" parent="23" name="orders_seq">
+    <sequence id="32" parent="23" name="orders_seq">
       <ObjectId>57729</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1052224</StateNumber>
@@ -198,7 +189,7 @@
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="34" parent="23" name="product_basket_seq">
+    <sequence id="33" parent="23" name="product_basket_seq">
       <ObjectId>57522</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1007930</StateNumber>
@@ -206,7 +197,7 @@
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="35" parent="23" name="product_seq">
+    <sequence id="34" parent="23" name="product_seq">
       <ObjectId>57520</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1007929</StateNumber>
@@ -214,13 +205,22 @@
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
-    <sequence id="36" parent="23" name="seq_contracts">
+    <sequence id="35" parent="23" name="seq_contracts">
       <ObjectId>57694</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>1051799</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="36" parent="23" name="category_id_seq">
+      <ObjectId>74301</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>1315421</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
     </sequence>
     <sequence id="37" parent="23" name="users_id_seq">
       <ObjectId>24576</ObjectId>

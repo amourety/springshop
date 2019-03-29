@@ -1,3 +1,13 @@
+function openFeedback() {
+    id = "formFeedback";
+    display = document.getElementById(id).style.display;
+    if (display === 'none') {
+        document.getElementById(id).style.display = 'block';
+    } else {
+        document.getElementById(id).style.display = 'none';
+    }
+}
+
 function getImg() {
     $.ajax({
         type: 'GET',
@@ -50,6 +60,38 @@ function isEmpty(str) {
         return true;
 
     return false;
+}
+
+
+function sendingFeedback() {
+    var text = document.getElementById('exampleFormControlTextarea1').value;
+    $.ajax({
+        type: 'POST',
+        url: '/contacts',
+        data: {
+            text: text
+        }
+    }).done(function () {
+
+    }).fail(function (jqXHR, exception) {
+        var msg = '';
+        if (jqXHR.status === 0) {
+            msg = 'Not connect.\n Verify Network.';
+        } else if (jqXHR.status == 404) {
+            msg = 'Requested page not found. [404]';
+        } else if (jqXHR.status == 500) {
+            msg = 'Internal Server Error [500].';
+        } else if (exception === 'parsererror') {
+            msg = 'Requested JSON parse failed.';
+        } else if (exception === 'timeout') {
+            msg = 'Time out error.';
+        } else if (exception === 'abort') {
+            msg = 'Ajax request aborted.';
+        } else {
+            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+        }
+        alert(msg)
+    });
 }
 
 function sendingMessage() {

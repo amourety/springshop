@@ -31,7 +31,9 @@ public class ProductServiceImpl implements ProductService{
     public void addProduct(Product model, String newCategory){
         if(newCategory.equals("true")){
             Category category = Category.builder().type(model.getCategory()).build();
-            categoryRepository.save(category);
+            if(categoryRepository.findByType(model.getCategory()) == null){
+                categoryRepository.save(category);
+            }
         }
         model.setCategory(categoryRepository.getCategoryByString(model.getCategory()));
         productsRepository.save(model);

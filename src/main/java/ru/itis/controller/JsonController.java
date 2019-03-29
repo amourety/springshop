@@ -32,7 +32,7 @@ public class JsonController {
     @Autowired
     private ShopService shopService;
 
-    private ObjectMapper mapper = new ObjectMapper();
+        private ObjectMapper mapper = new ObjectMapper();
 
     @RequestMapping(value = "/img", method = RequestMethod.GET)
     public void getImg(HttpServletRequest req, HttpServletResponse resp) {

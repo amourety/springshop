@@ -49,14 +49,22 @@ public class CategoryRepositoryImpl implements CategoryRepository {
             return null;
         }
     }
+    @Override
+    public Category findByType(String type){
+        //language=SQL
+        String sql = "select * from category where type = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, categoryRowMapper, type);
+        } catch (Exception e){
+            return null;
+        }
+    }
 
     @Override
     public void save(Category model) {
         //language=SQL
-        String sql = "insert into category(type) value ?";
-        if (this.getCategoryByString(model.getType()).equals("1")){
-            jdbcTemplate.update(sql, model.getType());
-        }
+        String sql = "insert into category(type) values (?)";
+        jdbcTemplate.update(sql, model.getType());
     }
 
     @Override
