@@ -86,33 +86,34 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-12">
-            <div style="height: 600px">
+            <div>
                 <div class="raw">
                     <div class="col-lg-10 col-md-12 col-12">
                         <h1 style="text-align: center;" id="special">${product.name}
                         </h1>
                     </div>
                     <div class="col-lg-10 col-md-12 col-12">
-                        <div class="list-group-item" style="padding: 5%;">
-                            <p style="font-size: 60px; color: #000000; font-weight: bold;"> ${product.name} </p>
-                            <img class="img-responsive" src="/${product.img}">
-                            <p style="font-size: 15px;"> ${product.category}</p>
-                            <p class="price lblue" id="special"
+                        <div class="list-group-item" id ="productItem">
+                            <p style="font-size: 60px; color: #000000; font-weight: bold;">${product.name}<span
+                                    style="font-size: 15px;">(${product.category})</span></p>
+                            <img class="img-responsive" id="productImg" src="/${product.img}">
+                            <p class="price lblue" id="rise"
                                style="font-size: 40px"> ${product.price} $</p>
-
-                            <br>
-                            <h3>About product</h3>
-                            <p style="word-wrap: break-word">
-                            ${product.about}
-                            </p>
-                            <br>
+                            <div>
+                                <h3 id="about">About product</h3>
+                                <p style="word-wrap: break-word">
+                                ${product.about}
+                                </p>
+                            </div>
+                            <div id="blockButtons">
                              <#if user ??>
-                            <a class="btn" href="" style="color: black"
+                            <a class="btn" href="" style="color: darkred"
                                onclick="doBuying(${product.id},${product.price}); return false;"> Add to
                                 cart</a>
                              </#if>
-                            <a class="btn" href="/main" style="color: black;">Back to catalog</a>
-                            <a class="btn" onclick="openFeedback()" style="color: black;">Add feedback</a>
+                                <a class="btn" href="/main" style="color: darkred;">Back to catalog</a>
+                                <a class="btn" onclick="openFeedback()" style="color: darkred;">Add feedback</a>
+                            </div>
                             <form id="formFeedback" style="display: none;">
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Feedback</label>
@@ -127,24 +128,23 @@
                     <button class="btn btn-lg btn-primary btn-danger" type="submit" onclick="">Please login first
                     </button>
                     </#if></form>
-                            <#--<div class="container" id="answers">-->
-                                <#--<h3> Feedbacks: ${feedbacks?size}  </h3>-->
-                                <#--<ul class="list-group">-->
-                                <#--<#list feedbacks as a>-->
-                    <#--<li class="list-group-item">-->
+                            <br>
+                        <#--<div class="container" id="answers">-->
+                        <#--<ul class="list-group">-->
+                        <#--<#list feedbacks as a>-->
+                        <#--<li class="list-group-item">-->
                         <#--<div class="alert alert-light" role="alert"><h5> ${a.owner} </h5>-->
-                            <#--<h5 id="special">${a.feedback} </h5>-->
+                        <#--<h5 id="special">${a.feedback} </h5>-->
                         <#--</div>-->
-                    <#--</li>-->
-                <#--</#list>-->
+                        <#--</li>-->
+                        <#--</#list>-->
 
-                                <#--</ul>-->
-                            <#--</div>-->
+                        <#--</ul>-->
+                        <#--</div>-->
                             <div class="container" id="answers">
-                                <h3> Feedbacks: 1 </h3>
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                        <div class="alert alert-light" role="alert"><h5> Nastya </h5>
+                                        <div class="alert alert-light" role="alert"><h5 class = "nickname"> Nastya </h5>
                                             <h5 id="special"> Normal </h5>
                                         </div>
                                     </li>
@@ -156,32 +156,27 @@
             </div>
         </div>
         <div class="col-lg-3 d-none d-lg-block d-md-none">
-            <div class="page-header">
-                <h2 id="special">
-                    Other products
+            <div class="page-header" id = "pageHeaderRandomItems">
+                <h2 id="special">Products
                 </h2></div>
-            <ul class="list-group">
+            <ul class="list-group" id = "randomItems">
                 <#list products as product>
-                    <li class="list-group-item">
-                        <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                          src="/${product.img}"></a></div>
-                        <div class="info">
+                    <li class="list-group-item" id ="randomItem">
+                        <div class="img"><p style="text-align: center;"><a href="/products/${product.id}"><img class="img-fluid" alt="Responsive image"
+                                                          src="/${product.img}" style="border: 2px solid #eee;  "></a></p></div>
+                        <div class="info" id = "info">
                             <a>${product.name}</a>
                             <span id="special">NEW!</span>
                             <div class="price">
                                 <span id="special">${product.price}$</span>
                             </div>
                         </div>
-                        <a class="btn-black" href="/products/${product.id}" style="color: black;">Info</a>
+                        <a class="btn" href="/products/${product.id}" id = "infoButton" style="color: black;">Info</a>
                     </li>
                 </#list>
             </ul>
         </div>
     </div>
-        <#if user ??>
-        <div class="col-12 col-lg-6 col-md-12">
-        </#if>
-</div>
 </div>
 <br>
 <footer class="py-5 bg-dark">
@@ -189,5 +184,36 @@
         <p class="m-0 text-center text-white">Electro Boom</p>
     </div>
 </footer>
+<#if user ??>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Your order</h4>
+            </div>
+            <div class="modal-body" id = "cart2">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="doOrder(); return false;" id ="dobutton">Do</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Your order</h4>
+            </div>
+            <div class="modal-body" id = "orders">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</#if>
 </body>
 </html>

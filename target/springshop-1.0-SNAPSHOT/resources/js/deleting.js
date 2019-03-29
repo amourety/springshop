@@ -151,7 +151,7 @@ function deleteProduct(id) {
                         + data[i].name + ' '+
                         data[i].price + ' '+
                         data[i].amount + ' '+
-                        '<img src="/images/delete.png" onclick="deleteProduct(' + data[i].id + '); return false;"/>';
+                        '<img src="/resources/images/delete.png" onclick="deleteProduct(' + data[i].id + '); return false;"/>';
                     tableHtml += '</a>';
                 }
             }

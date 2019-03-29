@@ -129,25 +129,24 @@
             </div>
         </div>
         <div class="col-lg-3 d-none d-lg-block d-md-none">
-            <div class="page-header">
+            <div class="page-header" id="pageHeaderRandomItems">
                 <div style="height: 70px;"></div>
 
-                <h2 id="special">
-                Other products
+                <h2 id="special">Products
             </h2></div>
-            <ul class="list-group">
+            <ul class="list-group" id = "randomItems">
                 <#list randomproducts as product>
-                    <li class="list-group-item">
-                        <div class="img"><a href="#"><img class="img-fluid" alt="Responsive image"
-                                                          src="/${product.img}"></a></div>
-                        <div class="info">
+                    <li class="list-group-item" id ="randomItem">
+                        <div class="img"><p style="text-align: center;"><a href="/products/${product.id}"><img class="img-fluid" alt="Responsive image"
+                                                                                                               src="/${product.img}" style="border: 2px solid #eee;"></a></p></div>
+                        <div class="info" id = "info">
                             <a>${product.name}</a>
                             <span id="special">NEW!</span>
                             <div class="price">
                                 <span id="special">${product.price}$</span>
                             </div>
                         </div>
-                        <a class="btn-black" href="/products/${product.id}" style="color: black;">Info</a>
+                        <a class="btn" href="/products/${product.id}" id ="infoButton" style="color: black;">Info</a>
                     </li>
                 </#list>
             </ul>
