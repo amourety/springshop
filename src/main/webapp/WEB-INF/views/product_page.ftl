@@ -93,7 +93,7 @@
                         </h1>
                     </div>
                     <div class="col-lg-10 col-md-12 col-12">
-                        <div class="list-group-item" id ="productItem">
+                        <div class="list-group-item" id="productItem">
                             <p style="font-size: 60px; color: #000000; font-weight: bold;">${product.name}<span
                                     style="font-size: 15px;">(${product.category})</span></p>
                             <img class="img-responsive" id="productImg" src="/${product.img}">
@@ -122,32 +122,22 @@
                                 </div>
                     <#if user ??>
                     <button class="btn btn-lg btn-black btn-block" type="submit"
-                            onclick="sendingFeedback(); return false;">Send
+                            onclick="sendingFeedback(${product.id}); return false;">Send
                     </button>
                     <#else>
                     <button class="btn btn-lg btn-primary btn-danger" type="submit" onclick="">Please login first
                     </button>
                     </#if></form>
                             <br>
-                        <#--<div class="container" id="answers">-->
-                        <#--<ul class="list-group">-->
-                        <#--<#list feedbacks as a>-->
-                        <#--<li class="list-group-item">-->
-                        <#--<div class="alert alert-light" role="alert"><h5> ${a.owner} </h5>-->
-                        <#--<h5 id="special">${a.feedback} </h5>-->
-                        <#--</div>-->
-                        <#--</li>-->
-                        <#--</#list>-->
-
-                        <#--</ul>-->
-                        <#--</div>-->
                             <div class="container" id="answers">
                                 <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <div class="alert alert-light" role="alert"><h5 class = "nickname"> Nastya </h5>
-                                            <h5 id="special"> Normal </h5>
-                                        </div>
-                                    </li>
+                        <#list feedbacks as a>
+                            <li class="list-group-item">
+                                <div class="alert alert-light" role="alert"><h5> ${a.username} </h5> <h6> (${a.time})</h6>
+                                    <h5 id="special">${a.text} </h5>
+                                </div>
+                            </li>
+                        </#list>
                                 </ul>
                             </div>
                         </div>
@@ -156,22 +146,23 @@
             </div>
         </div>
         <div class="col-lg-3 d-none d-lg-block d-md-none">
-            <div class="page-header" id = "pageHeaderRandomItems">
+            <div class="page-header" id="pageHeaderRandomItems">
                 <h2 id="special">Products
                 </h2></div>
-            <ul class="list-group" id = "randomItems">
+            <ul class="list-group" id="randomItems">
                 <#list products as product>
-                    <li class="list-group-item" id ="randomItem">
-                        <div class="img"><p style="text-align: center;"><a href="/products/${product.id}"><img class="img-fluid" alt="Responsive image"
-                                                          src="/${product.img}" style="border: 2px solid #eee;  "></a></p></div>
-                        <div class="info" id = "info">
+                    <li class="list-group-item" id="randomItem">
+                        <div class="img"><p style="text-align: center;"><a href="/products/${product.id}"><img
+                                class="img-fluid" alt="Responsive image"
+                                src="/${product.img}" style="border: 2px solid #eee;  "></a></p></div>
+                        <div class="info" id="info">
                             <a>${product.name}</a>
                             <span id="special">NEW!</span>
                             <div class="price">
                                 <span id="special">${product.price}$</span>
                             </div>
                         </div>
-                        <a class="btn" href="/products/${product.id}" id = "infoButton" style="color: black;">Info</a>
+                        <a class="btn" href="/products/${product.id}" id="infoButton" style="color: black;">Info</a>
                     </li>
                 </#list>
             </ul>
@@ -191,11 +182,12 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Your order</h4>
             </div>
-            <div class="modal-body" id = "cart2">
+            <div class="modal-body" id="cart2">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="doOrder(); return false;" id ="dobutton">Do</button>
+                <button type="button" class="btn btn-primary" onclick="doOrder(); return false;" id="dobutton">Do
+                </button>
             </div>
         </div>
     </div>
@@ -206,7 +198,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Your order</h4>
             </div>
-            <div class="modal-body" id = "orders">
+            <div class="modal-body" id="orders">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
