@@ -10,6 +10,7 @@
     <script src="/resources/js/admincommand.js"></script>
     <script src="/resources/js/bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/resources/css/style.css">
+
 </head>
 <body onload="getMessages()">
 <footer class="py-5 bg-light">

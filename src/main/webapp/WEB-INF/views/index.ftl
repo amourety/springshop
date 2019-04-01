@@ -18,6 +18,7 @@
     <script src="/resources/js/deleting.js"></script>
     <script src="/resources/js/getData.js"></script>
     <script src="/resources/js/renderAjax.js"></script>
+
     </head> <#if user ??>
     <body onload="renderAjax(); return false;">
     <#else>

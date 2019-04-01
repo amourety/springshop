@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/css/login.css" type="text/css">
     <script src ="/resources/js/bootstrap/bootstrap.min.js"></script>
+
 </head>
 <body>
 <footer class="py-5 bg-light">

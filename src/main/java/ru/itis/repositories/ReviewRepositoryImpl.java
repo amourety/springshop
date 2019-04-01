@@ -26,7 +26,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
     private static final String SQL_SELECT_BY_PRODUCT_ID_QUERY =
             "select name as username, reviews.id, \"text\", time " +
                     "from reviews join users on reviews.author_id = users.id " +
-                    "where product_id = ?";
+                    "where product_id = ? order by \"time\" desc";
     //language=SQL
     private static final String SQL_INSERT_QUERY = "insert into reviews (author_id, text, product_id, time) values (?, ?, ?, now())";
 

@@ -65,14 +65,29 @@ function isEmpty(str) {
 
 function sendingFeedback(productId) {
     let text = document.getElementById('exampleFormControlTextarea1').value;
+    document.getElementById('exampleFormControlTextarea1').value = "";
     $.ajax({
         type: 'POST',
         url: "/feedback",
         data: {
             productId: productId,
             text: text
+        },
+        data_type: 'json'
+    }).done(function (data) {
+        let tableHtml = "";
+        tableHtml += '<ul class="list-group">';
+        for (let i = 0; i < data.length; i++) {
+            tableHtml += '<li class="list-group-item">';
+            tableHtml += '<div class="alert alert-light" role="alert"><h5>' + data[i].username + '</h5> <h6>(' + (data[i].stringTime) + ')</h6>';
+            tableHtml += '<h5 id="special">' + data[i].text + '</h5>';
+            tableHtml += '</div>';
+            tableHtml += '</li>';
         }
-    }).done(function () {
+        tableHtml += '</ul>';
+
+        $("#feedbacks").html(tableHtml);
+
 
     }).fail(function (jqXHR, exception) {
         var msg = '';
@@ -139,7 +154,6 @@ function sendingMessage() {
     }
     return false;
 }
-
 
 function doBuying(id, price) {
     var a = +$("#amountOfCart").text();

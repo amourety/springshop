@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
     <script src ="/resources/js/bootstrap/bootstrap.min.js"></script>
     <script src ="/resources/js/registration.js"></script>
+
 </head>
 <body>
 <footer class="py-5 bg-light">

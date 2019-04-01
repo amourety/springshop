@@ -10,6 +10,9 @@
     <title>Electro Boom</title>
     <script src="/resources/js/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
     <script src="/resources/js/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/css/normalize.min.css">
+    <link rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" href="/resources/css/examples.css">
     <link rel="stylesheet" href="/resources/js/jquery-ui-1.12.1/jquery-ui.css">
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/style.css">
@@ -18,6 +21,17 @@
     <script src="/resources/js/deleting.js"></script>
     <script src="/resources/js/getData.js"></script>
     <script src="/resources/js/renderAjax.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <style>
+        @font-face {
+            font-family: 'Glyphicons Halflings';
+            src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot');
+            src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+            url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.woff') format('woff'),
+            url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+            url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+        }
+    </style>
 </head>
 <#if user ??>
     <body onload="renderAjax(); return false;">
@@ -122,6 +136,17 @@
                                     <textarea name="text" class="form-control" id="exampleFormControlTextarea1"
                                               rows="3"></textarea>
                                 </div>
+                                <div class="stars stars-example-bootstrap">
+                                    <span class="title">You can rate this product</span>
+                                    <div class="br-wrapper br-theme-bootstrap-stars"><select id="example-bootstrap" name="rating" style="display: none;">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select></div>
+                                </div>
+                                <br>
                     <#if user ??>
                     <button class="btn btn-lg btn-black btn-block" type="submit"
                             onclick="sendingFeedback(${product.id}); return false;">Send
@@ -132,7 +157,7 @@
                     </#if></form>
                             <br>
                             <#if user ??>
-                            <div class="container" id="answers">
+                            <div class="container" id="feedbacks">
                                 <ul class="list-group">
                         <#list feedbacks as a>
                             <li class="list-group-item">
@@ -211,5 +236,10 @@
     </div>
 </div>
 </#if>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/resources/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+<script src="/resources/js/jquery.barrating.js"></script>
+<script src="/resources/js/examples.js"></script>
 </body>
 </html>

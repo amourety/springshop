@@ -1,5 +1,6 @@
 package ru.itis.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,9 @@ import ru.itis.services.ReviewService;
 import ru.itis.services.UsersService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -47,7 +51,7 @@ public class ProductController {
         return modelAndView;
     }
     @RequestMapping(value = "/feedback", method = RequestMethod.POST)
-    public String saveReview(HttpServletRequest req) {
+    public void saveReview(HttpServletRequest req, HttpServletResponse response) throws IOException {
         User user2;
         try {
             user2 = usersService.find(usersService.getCurrentUser(req.getCookies()).getId());
@@ -66,7 +70,16 @@ public class ProductController {
         System.out.println(review.toString());
         reviewService.save(review);
         //todo change from void
-        return "redirect:/products/"+req.getParameter("productId");
+//        return "redirect:/products/"+req.getParameter("productId");
+        List<Review> reviews = reviewService.getReviewsByProductId(productId);
+        reviews = reviewService.getStringTime(reviews);
+        ObjectMapper mapper = new ObjectMapper();
+        String resultJson = mapper.writeValueAsString(reviews);
+        response.setStatus(200);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+        PrintWriter writer = response.getWriter();
+        writer.write(resultJson);
     }
 
     //todo add post request mapping if needed
