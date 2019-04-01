@@ -168,7 +168,6 @@ public class JsonController {
             baskets[i].setOrder_id(order.getId());
             baskets[i].setTrack(shopService.getTrack(order));
             baskets[i].setProducts(shopService.getProductsByOrder(basket,order));
-            System.out.println(baskets[i]);
             i++;
         }
 

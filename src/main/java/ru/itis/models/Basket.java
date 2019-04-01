@@ -33,7 +33,6 @@ public class Basket {
     }
 
     public void add(Product product){
-        System.out.println(product.toString());
         products.remove(findByName(product.getName()));
         products.add(product);
 

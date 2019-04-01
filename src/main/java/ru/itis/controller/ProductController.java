@@ -24,7 +24,7 @@ public class ProductController {
     @Autowired
     private ReviewService reviewService;
 
-    @RequestMapping("/products/{id}")
+    @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
     public ModelAndView getPage(@PathVariable("id") String stringId, HttpServletRequest req) {
         User user;
         try {
@@ -46,10 +46,8 @@ public class ProductController {
         modelAndView.addObject("user", user);
         return modelAndView;
     }
-    @PostMapping("/feedback")
-    public void saveReview(@RequestParam("productId") Long id,
-                           @RequestParam("text") String text,
-                           @SessionAttribute("user") User user, HttpServletRequest req) {
+    @RequestMapping(value = "/feedback", method = RequestMethod.POST)
+    public String saveReview(HttpServletRequest req) {
         User user2;
         try {
             user2 = usersService.find(usersService.getCurrentUser(req.getCookies()).getId());
@@ -57,13 +55,18 @@ public class ProductController {
         } catch (Exception e) {
             user2 = null;
         }
+        Long productId = Long.parseLong(    req.getParameter("productId"));
+        System.out.println(productId);
         Review review = Review.builder()
-                .productId(id)
-                .text(text)
+                .productId(productId)
+                .text(req.getParameter("text"))
                 .authorId(user2.getId())
+                .username(user2.getName())
                 .build();
+        System.out.println(review.toString());
         reviewService.save(review);
         //todo change from void
+        return "redirect:/products/"+req.getParameter("productId");
     }
 
     //todo add post request mapping if needed

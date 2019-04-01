@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
+@ToString
 public class Review {
 
     private Long id;

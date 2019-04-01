@@ -64,7 +64,7 @@ function isEmpty(str) {
 
 
 function sendingFeedback(productId) {
-    var text = document.getElementById('exampleFormControlTextarea1').value;
+    let text = document.getElementById('exampleFormControlTextarea1').value;
     $.ajax({
         type: 'POST',
         url: "/feedback",

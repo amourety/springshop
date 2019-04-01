@@ -55,7 +55,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
     @Override
     public void save(Review model) {
-        jdbcTemplate.update(SQL_INSERT_QUERY, model.getAuthorId(), model.getText(), model.getProductId(), model.getTime());
+        jdbcTemplate.update(SQL_INSERT_QUERY, model.getAuthorId(), model.getText(), model.getProductId());
     }
 
     @Override

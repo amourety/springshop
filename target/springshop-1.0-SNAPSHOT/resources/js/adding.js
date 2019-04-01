@@ -63,12 +63,13 @@ function isEmpty(str) {
 }
 
 
-function sendingFeedback() {
-    var text = document.getElementById('exampleFormControlTextarea1').value;
+function sendingFeedback(productId) {
+    let text = document.getElementById('exampleFormControlTextarea1').value;
     $.ajax({
         type: 'POST',
-        url: '/contacts',
+        url: "/feedback",
         data: {
+            productId: productId,
             text: text
         }
     }).done(function () {

@@ -112,7 +112,9 @@
                                 cart</a>
                              </#if>
                                 <a class="btn" href="/main" style="color: darkred;">Back to catalog</a>
+                               <#if user ??>
                                 <a class="btn" onclick="openFeedback()" style="color: darkred;">Add feedback</a>
+                               </#if>
                             </div>
                             <form id="formFeedback" style="display: none;">
                                 <div class="form-group">
@@ -129,6 +131,7 @@
                     </button>
                     </#if></form>
                             <br>
+                            <#if user ??>
                             <div class="container" id="answers">
                                 <ul class="list-group">
                         <#list feedbacks as a>
@@ -140,6 +143,7 @@
                         </#list>
                                 </ul>
                             </div>
+                            </#if>
                         </div>
                     </div>
                 </div>
