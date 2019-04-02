@@ -25,8 +25,8 @@
     <style>
         @font-face {
             font-family: 'Glyphicons Halflings';
-            src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot');
-            src:url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot');
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
             url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.woff') format('woff'),
             url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
             url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
@@ -99,7 +99,8 @@
 <div style="height: 120px;"></div>
 <div class="container">
     <div class="row">
-        <div class="col-lg-9 col-md-12 col-12">
+    <div class="col-lg-9 col-md-12 col-12">
+        <#if product ??>
             <div>
                 <div class="raw">
                     <div class="col-lg-10 col-md-12 col-12">
@@ -113,10 +114,11 @@
                             <img class="img-responsive" id="productImg" src="/${product.img}">
                             <p class="price lblue" id="rise"
                                style="font-size: 40px"> ${product.price} $</p>
+                            <h5>Rating: <span id="productRating">${product.rating}</span></h5>
                             <div>
                                 <h3 id="about">About product</h3>
                                 <p style="word-wrap: break-word">
-                                ${product.about}
+                                    ${product.about}
                                 </p>
                             </div>
                             <div id="blockButtons">
@@ -138,7 +140,9 @@
                                 </div>
                                 <div class="stars stars-example-bootstrap">
                                     <span class="title">You can rate this product</span>
-                                    <div class="br-wrapper br-theme-bootstrap-stars"><select id="example-bootstrap" name="rating" style="display: none;">
+                                    <div class="br-wrapper br-theme-bootstrap-stars"><select id="example-bootstrap"
+                                                                                             name="rating"
+                                                                                             style="display: none;">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -156,24 +160,27 @@
                     </button>
                     </#if></form>
                             <br>
-                            <#if user ??>
-                            <div class="container" id="feedbacks">
-                                <ul class="list-group">
+                            <div class="container">
+                                <h2>Feedbacks (<span id="countFeedback">${feedbacks?size}</span>)</h2>
+                                <div id="feedbacks">
+                                    <ul class="list-group">
                         <#list feedbacks as a>
                             <li class="list-group-item">
                                 <div class="alert alert-light" role="alert"><h5> ${a.username} </h5> <h6> (${a.time})</h6>
                                     <h5 id="special">${a.text} </h5>
+                                    <a style="font-size: 12px; color: #adabab;"> Rating: ${a.rate} </a>
                                 </div>
                             </li>
                         </#list>
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
-                            </#if>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </#if>
         <div class="col-lg-3 d-none d-lg-block d-md-none">
             <div class="page-header" id="pageHeaderRandomItems">
                 <h2 id="special">Products

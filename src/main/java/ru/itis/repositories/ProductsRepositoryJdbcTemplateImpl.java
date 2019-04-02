@@ -29,7 +29,7 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
 
     //language=SQL
     private static final String SQL_SELECT_ALL_PRODUCTS =
-            "select * from product p order by p.id";
+            "select * from product p join category c2 on p.category = c2.id order by p.id";
 
     //language=SQL
     private static final String SQL_INSERT_PRODUCT =
@@ -58,6 +58,8 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
             .img(resultSet.getString("img"))
             .category(resultSet.getString("type"))
             .about(resultSet.getString("about"))
+            .rating(resultSet.getDouble("rating"))
+            .countReviews(resultSet.getInt("countreview"))
             .build();
 
     @Override
@@ -69,7 +71,7 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
 
     @Override
     public List<Product> findAll() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_PRODUCTS, productRowMapper);
+        return jdbcTemplate.query(SQL_SELECT_ALL_PRODUCTS, productRowMapperCategory);
     }
 
     @Override

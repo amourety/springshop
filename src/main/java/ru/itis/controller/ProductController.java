@@ -44,9 +44,14 @@ public class ProductController {
         //name of the template is to be changed when we make it
         ModelAndView modelAndView = new ModelAndView("product_page");
         System.out.println(product);
-        modelAndView.addObject("feedbacks", reviewList);
+        if(product == null){
+            modelAndView.addObject("product", null);
+        }
+        else {
+            modelAndView.addObject("product", product);
+            modelAndView.addObject("feedbacks", reviewList);
+        }
         modelAndView.addObject("products", productList);
-        modelAndView.addObject("product", product);
         modelAndView.addObject("user", user);
         return modelAndView;
     }
@@ -66,6 +71,7 @@ public class ProductController {
                 .text(req.getParameter("text"))
                 .authorId(user2.getId())
                 .username(user2.getName())
+                .rate(Integer.parseInt(req.getParameter("rate")))
                 .build();
         System.out.println(review.toString());
         reviewService.save(review);
@@ -75,6 +81,19 @@ public class ProductController {
         reviews = reviewService.getStringTime(reviews);
         ObjectMapper mapper = new ObjectMapper();
         String resultJson = mapper.writeValueAsString(reviews);
+        response.setStatus(200);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+        PrintWriter writer = response.getWriter();
+        writer.write(resultJson);
+    }
+    @RequestMapping(value = "/rating", method = RequestMethod.POST)
+    public void getRating(HttpServletRequest req, HttpServletResponse response) throws IOException {
+        Long id = Long.parseLong(req.getParameter("productId"));
+        Product product = productService.getById(id);
+        System.out.println(product);
+        ObjectMapper mapper = new ObjectMapper();
+        String resultJson = mapper.writeValueAsString(product);
         response.setStatus(200);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");

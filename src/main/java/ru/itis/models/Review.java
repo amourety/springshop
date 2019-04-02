@@ -18,4 +18,5 @@ public class Review {
     private Long productId;
     private String username;
     private String stringTime;
+    private Integer rate;
 }

@@ -66,21 +66,25 @@ function isEmpty(str) {
 function sendingFeedback(productId) {
     let text = document.getElementById('exampleFormControlTextarea1').value;
     document.getElementById('exampleFormControlTextarea1').value = "";
+    let rate = $("#example-bootstrap").val();
     $.ajax({
         type: 'POST',
         url: "/feedback",
         data: {
             productId: productId,
-            text: text
+            text: text,
+            rate: rate
         },
         data_type: 'json'
     }).done(function (data) {
+        renderRating(productId);
         let tableHtml = "";
         tableHtml += '<ul class="list-group">';
         for (let i = 0; i < data.length; i++) {
             tableHtml += '<li class="list-group-item">';
             tableHtml += '<div class="alert alert-light" role="alert"><h5>' + data[i].username + '</h5> <h6>(' + (data[i].stringTime) + ')</h6>';
             tableHtml += '<h5 id="special">' + data[i].text + '</h5>';
+            tableHtml += '<a style="font-size: 12px; color: #adabab;"> Rating:' + data[i].rate + '</a>';
             tableHtml += '</div>';
             tableHtml += '</li>';
         }
@@ -90,6 +94,38 @@ function sendingFeedback(productId) {
 
 
     }).fail(function (jqXHR, exception) {
+        var msg = '';
+        if (jqXHR.status === 0) {
+            msg = 'Not connect.\n Verify Network.';
+        } else if (jqXHR.status == 404) {
+            msg = 'Requested page not found. [404]';
+        } else if (jqXHR.status == 500) {
+            msg = 'Internal Server Error [500].';
+        } else if (exception === 'parsererror') {
+            msg = 'Requested JSON parse failed.';
+        } else if (exception === 'timeout') {
+            msg = 'Time out error.';
+        } else if (exception === 'abort') {
+            msg = 'Ajax request aborted.';
+        } else {
+            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+        }
+        alert(msg)
+    });
+}
+
+function renderRating(productId) {
+    $.ajax({
+        type: 'POST',
+        url: "/rating",
+        data: {
+            productId: productId,
+        },
+        data_type: 'json'
+    }).done(function (data) {
+        $("#productRating").html(data.rating);
+        $("#countFeedback").html(data.countReviews);
+            }).fail(function (jqXHR, exception) {
         var msg = '';
         if (jqXHR.status === 0) {
             msg = 'Not connect.\n Verify Network.';
