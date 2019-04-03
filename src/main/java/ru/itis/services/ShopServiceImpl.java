@@ -3,15 +3,14 @@ package ru.itis.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.itis.models.Basket;
-import ru.itis.models.Order;
-import ru.itis.models.Product;
-import ru.itis.models.User;
+import ru.itis.models.*;
 import ru.itis.repositories.BasketRepository;
 import ru.itis.repositories.OrderRepository;
 import ru.itis.repositories.ProductsRepository;
 
 import javax.servlet.http.Cookie;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Component
@@ -165,6 +164,10 @@ public class ShopServiceImpl implements ShopService {
         }
         orderStr += " total price:" + sum;
         return orderStr;
+    }
+    public String getStringTime(Timestamp time){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+            return dateFormat.format(time);
     }
 
 }

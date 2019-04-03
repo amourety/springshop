@@ -2,6 +2,7 @@ package ru.itis.models;
 
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -17,6 +18,7 @@ public class Basket {
     private User user;
     private List<Product> products;
     private String track;
+    private String time;
 
     public Basket(User basketOwner) {
         this.user = basketOwner;

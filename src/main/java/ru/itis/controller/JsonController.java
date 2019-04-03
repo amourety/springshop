@@ -136,6 +136,7 @@ public class JsonController {
             Basket newBasket = Basket.builder().order_id(order.getId())
                     .track(shopService.getTrack(order))
                     .products(shopService.getProductsByOrder(basket, order))
+                    .time(shopService.getStringTime(order.getTime()))
                     .build();
             baskets.add(newBasket);
         }

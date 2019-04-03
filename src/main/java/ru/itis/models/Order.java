@@ -3,6 +3,8 @@ package ru.itis.models;
 
 import lombok.*;
 
+import java.sql.Timestamp;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,9 +14,10 @@ import lombok.*;
 @ToString
 public class Order {
 
-    Long id;
-    Long user_id;
-    Long basket_id;
-    String text;
-    String track;
+    private Long id;
+    private Long user_id;
+    private Long basket_id;
+    private String text;
+    private String track;
+    private Timestamp time;
 }

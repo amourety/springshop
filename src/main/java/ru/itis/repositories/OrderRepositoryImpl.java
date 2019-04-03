@@ -21,6 +21,7 @@ public class OrderRepositoryImpl implements OrderRepository{
             basket_id(resultSet.getLong("basket_id")).
             text(resultSet.getString("text_order")).
             track(resultSet.getString("track")).
+            time(resultSet.getTimestamp("time")).
             build();
 
     @Override
@@ -59,7 +60,7 @@ public class OrderRepositoryImpl implements OrderRepository{
 
         //создаю заказ
         //language=SQL
-        String SQL_INSERT_ORDER = "insert into orders (user_id) values (?)";
+        String SQL_INSERT_ORDER = "insert into orders (user_id,time) values (?,now())";
         jdbcTemplate.update(SQL_INSERT_ORDER, order.getUser_id());
 
         //вытаскиваю заказ
@@ -69,8 +70,8 @@ public class OrderRepositoryImpl implements OrderRepository{
         Order order_with_id  = jdbcTemplate.queryForObject(SQL_SELECT_ID_ORDER, orderRowMapper, order.getUser_id());
 
         //language=SQL
-        String SQL_UPDATE_ORDER_BASKET_ID = "update orders set text_order = ?, basket_id = ?, track = ? where id = ?";
-        jdbcTemplate.update(SQL_UPDATE_ORDER_BASKET_ID, order.getText(), basket.getId(),"accepted", order_with_id.getId());
+        String SQL_UPDATE_ORDER_BASKET_ID = "update orders set text_order = ?, basket_id = ? where id = ?";
+        jdbcTemplate.update(SQL_UPDATE_ORDER_BASKET_ID, order.getText(), basket.getId(), order_with_id.getId());
 
         //language=SQL
         String SQL_UPDATE_BASKET = "update product_basket set order_id = ? where basket_id = ? and order_id is null";

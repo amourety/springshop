@@ -61,7 +61,8 @@ function getUserOrders() {
             tableHtml += '<br>';
             tableHtml += '<button type="button" class="btn btn-danger"' + ' onclick = "deleteUserOrder(' + data[i].order_id + '); return false;"> Delete </button>';
             tableHtml += "</div>";
-            tableHtml += "<h3 style='color:greenyellow;'>" + data[i].track + '</h3>';
+            tableHtml += "<h3 style='color:#179e17;'>" + data[i].track + '</h3>';
+            tableHtml += "<h5 style='color:darkred'>" + data[i].time + '</h5>';
             tableHtml += "</li>"
         }
 

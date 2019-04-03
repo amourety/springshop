@@ -6,6 +6,7 @@ import ru.itis.models.Product;
 import ru.itis.models.User;
 
 import javax.servlet.http.Cookie;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface ShopService {
@@ -29,4 +30,5 @@ public interface ShopService {
 
     List<Product> getProductsByOrder(Basket basket, Order order);
     String getTrack(Order order);
+    String getStringTime(Timestamp time);
 }
