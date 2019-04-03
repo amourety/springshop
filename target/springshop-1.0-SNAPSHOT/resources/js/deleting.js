@@ -20,7 +20,7 @@ function exit() {
 
 
 function deleteAnswer(id) {
-    var a = +$("#answersCount").text();
+    let a = +$("#answersCount").text();
     a = a - 1;
     if (+a > 0) {
         $("#answersCount").html(a);
@@ -38,7 +38,7 @@ function deleteAnswer(id) {
     }).done(function () {
        renderAnswers();
     }).fail(function (jqXHR, exception) {
-        var msg = '';
+        let msg = '';
         if (jqXHR.status === 0) {
             msg = 'Not connect.\n Verify Network.';
         } else if (jqXHR.status == 404) {
@@ -66,14 +66,14 @@ function deleteAllProduct() {
             action: 'deleteAll'
         }
     }).done(function () {
-        var tableHtml = "";
+        let tableHtml = "";
         tableHtml += '<a class="dropdown-item" href="#">All removed</a>';
         $("#amountOfCart").html("");
         $("#sum").html('Count: ' + 0 + "$")
         $("#cart").html(tableHtml);
         return false;
     }).fail(function (jqXHR, exception) {
-        var msg = '';
+        let msg = '';
         if (jqXHR.status === 0) {
             msg = 'Not connect.\n Verify Network.';
         } else if (jqXHR.status == 404) {
@@ -95,7 +95,7 @@ function deleteAllProduct() {
 }
 
 function deleteUserOrder(id) {
-    var a = +$("#amountOfOrders").text();
+    let a = +$("#amountOfOrders").text();
     a = a - 1;
     if(+a > 0) {
         $("#amountOfOrders").html(a);
@@ -115,7 +115,7 @@ function deleteUserOrder(id) {
 
 
 function deleteProduct(id) {
-    var a = +$("#amountOfCart").text();
+    let a = +$("#amountOfCart").text();
     a = a - 1;
     if(+a > 0) {
         $("#amountOfCart").html(a);
@@ -130,7 +130,7 @@ function deleteProduct(id) {
             action: 'delete'
         }
     }).done(function (data) {
-        var tableHtml = "";
+        let tableHtml = "";
         if (data.length === 0) {
             tableHtml += 'All removed';
             $("#cart").html(tableHtml);
@@ -139,9 +139,9 @@ function deleteProduct(id) {
             if (data.length === 0) {
                 tableHtml += '<a class="dropdown-item" href="#">Your cart is empty</a>';
             } else {
-                var sum = 0;
-                var amount = 0;
-                for (var i = 0; i < data.length; i++) {
+                let sum = 0;
+                let amount = 0;
+                for (let i = 0; i < data.length; i++) {
                     sum = sum + +data[i].price * +data[i].amount;
                     amount = amount + +data[i].amount;
                 }
@@ -163,7 +163,7 @@ function deleteProduct(id) {
             $("#cart").html(tableHtml);
         }
     }).fail(function (jqXHR, exception) {
-        var msg = '';
+        let msg = '';
         if (jqXHR.status === 0) {
             msg = 'Not connect.\n Verify Network.';
         } else if (jqXHR.status == 404) {

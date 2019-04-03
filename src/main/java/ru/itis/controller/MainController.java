@@ -16,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -45,7 +46,6 @@ public class MainController {
             user = null;
         }
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println(products);
         modelAndView.addObject("user", user);
         modelAndView.addObject("products",products);
         modelAndView.addObject("randomproducts", productService.getRandomProducts());
@@ -54,7 +54,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/main", method = RequestMethod.POST)
-    public ResponseEntity<Object> getPost(HttpServletRequest req, HttpServletResponse res){
+    public ResponseEntity<List<?>> getPost(HttpServletRequest req, HttpServletResponse res){
         Cookie[] cookies = req.getCookies();
         if (cookies == null) {
             cookies = new Cookie[0];
@@ -86,7 +86,7 @@ public class MainController {
             case "addOrder":
                 shopService.addOrder(cookies,loginService);
                 basket = shopService.deleteAll(cookies, loginService);
-                return ResponseEntity.ok(basket);
+                return ResponseEntity.ok(Collections.singletonList(basket));
             case "deleteOrder":
                 Long orderId = Long.valueOf(req.getParameter("order_id"));
                 shopService.deleteOrder(orderId);

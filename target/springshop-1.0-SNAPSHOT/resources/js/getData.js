@@ -1,5 +1,5 @@
 function search() {
-    var query = document.getElementById("q").value;
+    let query = document.getElementById("q").value;
     $.ajax({
         type: 'GET',
         url: '/search',
@@ -7,10 +7,10 @@ function search() {
             q: query
         }
     }).done(function (data) {
-        var tableHtml = "";
+        let tableHtml = "";
         tableHtml += '<div class = "row">';
-        var availableTags = [];
-        for(var i = 0; i < data.length;i++){
+        let availableTags = [];
+        for(let i = 0; i < data.length;i++){
             availableTags[i] = data[i].name;
             tableHtml +='<div class="col-md-4 col-sm-6 col-lg-4">';
             tableHtml +='<div class="item">';
@@ -40,71 +40,21 @@ function search() {
 
 }
 
-
 function getUserOrders() {
     $.ajax({
-        type: 'GET',
-        url: '/orders.json',
+        type: 'POST',
+        url: '/orders',
         data_type: 'json'
     }).done(function (data) {
-        var tableHtml = "";
+        let tableHtml = "";
         tableHtml += '<h3> Orders: ' + data.length + '</h3>';
         tableHtml += "<ul class = \"list-group\">";
-        for(var i = 0; i < data.length; i++) {
-            tableHtml += '<li class=\"list-group-item\">';
-            tableHtml += '<div class="alert alert-light" role="alert">';
-            tableHtml += '<h5>' + (i + 1) + ' Order id[' + data[i].id + ']</h5>';
-            tableHtml += '<h5>'  +  data[i].text + '</h5>';
-            tableHtml += '<button type="button" class="btn btn-danger"' + ' onclick = "deleteUserOrder(' + data[i].id + '); return false;"> Delete </button>';
-            tableHtml += "</div>";
-            tableHtml += "</li>"
-        }
-
-
-        tableHtml += "</ul>";
-        if(data.length === 0) {
-            $('#amountOfOrders').html("");
-        } else {
-            $('#amountOfOrders').html(data.length);
-        }
-        $("#orders").html(tableHtml);
-    }).fail(function (jqXHR, exception) {
-        var msg = '';
-        if (jqXHR.status === 0) {
-            msg = 'Not connect.\n Verify Network.';
-        } else if (jqXHR.status == 404) {
-            msg = 'Requested page not found. [404]';
-        } else if (jqXHR.status == 500) {
-            msg = 'Internal Server Error [500].';
-        } else if (exception === 'parsererror') {
-            msg = 'Requested JSON parse failed.';
-        } else if (exception === 'timeout') {
-            msg = 'Time out error.';
-        } else if (exception === 'abort') {
-            msg = 'Ajax request aborted.';
-        } else {
-            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-        }
-        alert(msg)
-    });
-
-}
-
-function getUserOrders() {
-    $.ajax({
-        type: 'GET',
-        url: '/orders.json',
-        data_type: 'json'
-    }).done(function (data) {
-        var tableHtml = "";
-        tableHtml += '<h3> Orders: ' + data.length + '</h3>';
-        tableHtml += "<ul class = \"list-group\">";
-        for(var i = 0; i < data.length; i++) {
+        for(let i = 0; i < data.length; i++) {
             tableHtml += '<li class=\"list-group-item\">';
             tableHtml += '<div class="alert alert-light" role="alert">';
             tableHtml += '<h5>' + (i + 1) + '. ' + '</h5>';
             tableHtml += '<ul class="list-group">';
-            for (j = 0; j < data[i].products.length; j ++) {
+            for (let j = 0; j < data[i].products.length; j ++) {
                 tableHtml += '<li class="list-group-item">' + data[i].products[j].name + " " + data[i].products[j].price + " " + data[i].products[j].amount + '</li>';
             }
             tableHtml += '</ul>';
@@ -124,7 +74,7 @@ function getUserOrders() {
         }
         $("#orders").html(tableHtml);
     }).fail(function (jqXHR, exception) {
-        var msg = '';
+        let msg = '';
         if (jqXHR.status === 0) {
             msg = 'Not connect.\n Verify Network.';
         } else if (jqXHR.status == 404) {
@@ -162,19 +112,19 @@ function getData() {
             "click": function(e){ this.closable = !$(e.target).closest(".dropdown-menu").length; },
         },".dropdown.keepopen");
 
-        var tableHtml = "";
+        let tableHtml = "";
+        let sum = 0;
+        let amount = 0;
         if (data.length === 0) {
             tableHtml += '<a class="dropdown-item" href="#">Your cart is empty</a>';
             $("#amountOfCart").html('');
             $("#dobutton").hide();
         } else {
-            var sum = 0;
-            var amount = 0;
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 sum = sum + +data[i].price * +data[i].amount;
                 amount = amount + +data[i].amount;
             }
-            for (i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 tableHtml += '<a class="dropdown-item" href="#">'
                     + data[i].name + ' '+
                     data[i].price + '$ '+
@@ -191,7 +141,7 @@ function getData() {
         $("#cart").html(tableHtml);
         $("#cart2").html(tableHtml);
     }).fail(function (jqXHR, exception) {
-        var msg = '';
+        let msg = '';
         if (jqXHR.status === 0) {
             msg = 'Not connect.\n Verify Network.';
         } else if (jqXHR.status == 404) {
@@ -220,7 +170,7 @@ function getData() {
             $('#answersCount').html(data.length);
         }
     }).fail(function (jqXHR, exception) {
-        var msg = '';
+        let msg = '';
         if (jqXHR.status === 0) {
             msg = 'Not connect.\n Verify Network.';
         } else if (jqXHR.status == 404) {

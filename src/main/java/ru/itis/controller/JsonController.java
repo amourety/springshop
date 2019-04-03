@@ -13,7 +13,7 @@ import ru.itis.services.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -100,28 +100,29 @@ public class JsonController {
     @SneakyThrows
     @ResponseBody
     @RequestMapping(value = "/main.json", method = RequestMethod.GET)
-    public ResponseEntity<Basket> getData(HttpServletRequest request){
+    public ResponseEntity<List<Product>> getData(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
             cookies = new Cookie[0];
         }
 
         Basket basket = shopService.getUserBasket(loginService, cookies);
-        return ResponseEntity.ok(basket);
+        System.out.println(basket);
+        return ResponseEntity.ok(basket.getProducts());
     }
 
     @SneakyThrows
     @ResponseBody
-    @RequestMapping(value = "/orders.json", method = RequestMethod.GET)
-    public ResponseEntity<Basket[]> getUserOrders(HttpServletRequest request){
+    @RequestMapping(value = "/orders", method = RequestMethod.POST)
+    public ResponseEntity<List<Basket>> getUserOrders(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
 
         if (cookies == null) {
             cookies = new Cookie[0];
         }
         User currentUser = new User();
-        for(Cookie cookie:cookies){
-            if(cookie.getName().equals("auth")) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("auth")) {
                 Auth auth = authService.findByCookieValue(cookie.getValue());
                 currentUser = usersService.find(auth.getUser().getId());
 
@@ -129,16 +130,14 @@ public class JsonController {
         }
         Basket basket = shopService.findByOwnerId(currentUser.getId());
         List<Order> orders = shopService.getUserOrders(currentUser);
-        Basket[] baskets = new Basket[orders.size()];
-        int i = 0;
-
+        List<Basket> baskets = new ArrayList<>();
         //TODO FIX
-        for(Order order: orders){
-            baskets[i] = basket;
-            baskets[i].setOrder_id(order.getId());
-            baskets[i].setTrack(shopService.getTrack(order));
-            baskets[i].setProducts(shopService.getProductsByOrder(basket,order));
-            i++;
+        for (Order order : orders) {
+            Basket newBasket = Basket.builder().order_id(order.getId())
+                    .track(shopService.getTrack(order))
+                    .products(shopService.getProductsByOrder(basket, order))
+                    .build();
+            baskets.add(newBasket);
         }
 
         return ResponseEntity.ok(baskets);

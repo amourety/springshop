@@ -192,7 +192,7 @@ function sendingMessage() {
 }
 
 function doBuying(id, price) {
-    var a = +$("#amountOfCart").text();
+    let a = +$("#amountOfCart").text();
     a = a + 1;
     if (+a > 0) {
         $("#amountOfCart").html(a);
@@ -209,18 +209,18 @@ function doBuying(id, price) {
             price: price
         }
     }).done(function (data) {
-        var tableHtml = "";
+        let tableHtml = "";
+        let sum = 0;
+        let amount = 0;
         if (data.length === 0) {
             tableHtml += '<a class="dropdown-item" href="#">Your cart is empty</a>';
         } else {
-            var sum = 0;
-            var amount = 0;
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 sum = sum + +data[i].price * +data[i].amount;
                 amount = amount + +data[i].amount;
             }
 
-            for (i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.   length; i++) {
                 tableHtml += '<a class="dropdown-item" href="#">'
                     + data[i].name + ' ' +
                     data[i].price + ' ' +
