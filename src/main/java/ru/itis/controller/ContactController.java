@@ -3,6 +3,7 @@ package ru.itis.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +29,11 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/contacts")
+@RequiredArgsConstructor
 public class ContactController {
-    @Autowired
-    private ContactService contactService;
-    @Autowired
-    private UsersService usersService;
-    @Autowired
-    private AuthService authService;
+     private final ContactService contactService;
+     private final UsersService usersService;
+     private final AuthService authService;
 
     private ObjectMapper mapper = new ObjectMapper();
 

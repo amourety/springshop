@@ -2,11 +2,16 @@ package ru.itis.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import ru.itis.models.*;
 import ru.itis.services.*;
 
@@ -17,22 +22,15 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class JsonController {
 
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private AuthService authService;
-    @Autowired
-    private ContactService contactService;
-    @Autowired
-    private UsersService usersService;
-    @Autowired
-    private LoginService loginService;
-    @Autowired
-    private ShopService shopService;
-
-        private ObjectMapper mapper = new ObjectMapper();
+    private final ProductService productService;
+    private final AuthService authService;
+    private final ContactService contactService;
+    private final UsersService usersService;
+    private final LoginService loginService;
+    private final ShopService shopService;
 
     @RequestMapping(value = "/img", method = RequestMethod.GET)
     public void getImg(HttpServletRequest req, HttpServletResponse resp) {
@@ -60,23 +58,20 @@ public class JsonController {
     }
 
     @SneakyThrows
+    @ResponseBody
     @RequestMapping(value = "/allusers.json", method = RequestMethod.GET)
-    public void getAllUsers(HttpServletResponse response) {
+    public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = usersService.getUsers();
         for (User user : users) {
             user.setRole(usersService.getRoleByUser(user));
         }
-        String resultJson = mapper.writeValueAsString(users);
-        response.setStatus(200);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        PrintWriter writer = response.getWriter();
-        writer.write(resultJson);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @SneakyThrows
+    @ResponseBody
     @RequestMapping(value = "/answers.json", method = RequestMethod.GET)
-    public void getAnswers(HttpServletRequest request,HttpServletResponse response) {
+    public ResponseEntity<List<Contact>> getAnswers(HttpServletRequest request,HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
 
         if (cookies == null) {
@@ -89,43 +84,28 @@ public class JsonController {
                 currentUser = usersService.find(auth.getUser().getId());
             }
         }
-        List<Contact> contacts = contactService.getAnswers(currentUser);
-
-        String resultJson = mapper.writeValueAsString(contacts);
-        response.setStatus(200);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        PrintWriter writer = response.getWriter();
-        writer.write(resultJson);
+        return ResponseEntity.ok(contactService.getAnswers(currentUser));
     }
 
     @SneakyThrows
+    @ResponseBody
     @RequestMapping(value = "/catalog.json", method = RequestMethod.GET)
-    public void getCatalog(HttpServletRequest request,HttpServletResponse response){
-        List<Product> productList = productService.findAll();
-        String resultJson = mapper.writeValueAsString(productList);
-        response.setStatus(200);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        PrintWriter writer = response.getWriter();
-        writer.write(resultJson);
+    public ResponseEntity<List<Product>> getCatalog(HttpServletRequest request,HttpServletResponse response){
+        return ResponseEntity.ok(productService.findAll());
     }
 
     @SneakyThrows
+    @ResponseBody
     @RequestMapping(value = "/messages.json", method = RequestMethod.GET)
-    public void getMessages(HttpServletRequest request,HttpServletResponse response){
-        List<Contact> contacts = contactService.getMessages();
-        String resultJson = mapper.writeValueAsString(contacts);
-        response.setStatus(200);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        PrintWriter writer = response.getWriter();
-        writer.write(resultJson);
+    public ResponseEntity<List<Contact>> getMessages(HttpServletRequest request,HttpServletResponse response){
+        return ResponseEntity.ok(contactService.getMessages());
+
     }
 
     @SneakyThrows
+    @ResponseBody
     @RequestMapping(value = "/main.json", method = RequestMethod.GET)
-    public void getData(HttpServletRequest request,HttpServletResponse response){
+    public ResponseEntity<Basket> getData(HttpServletRequest request,HttpServletResponse response){
         Cookie[] cookies = request.getCookies();
 
         if (cookies == null) {
@@ -133,17 +113,13 @@ public class JsonController {
         }
 
         Basket basket = shopService.getUserBasket(loginService, cookies);
-        String resultJson = mapper.writeValueAsString(basket.getProducts());
-        response.setStatus(200);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        PrintWriter writer = response.getWriter();
-        writer.write(resultJson);
+        return ResponseEntity.ok(basket);
     }
 
     @SneakyThrows
+    @ResponseBody
     @RequestMapping(value = "/orders.json", method = RequestMethod.GET)
-    public void getUserOrders(HttpServletRequest request,HttpServletResponse response){
+    public ResponseEntity<Basket[]> getUserOrders(HttpServletRequest request,HttpServletResponse response){
         Cookie[] cookies = request.getCookies();
 
         if (cookies == null) {
@@ -171,11 +147,6 @@ public class JsonController {
             i++;
         }
 
-        String resultJson = mapper.writeValueAsString(baskets);
-        response.setStatus(200);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        PrintWriter writer = response.getWriter();
-        writer.write(resultJson);
+        return ResponseEntity.ok(baskets);
     }
 }

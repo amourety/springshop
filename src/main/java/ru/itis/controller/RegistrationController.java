@@ -4,10 +4,12 @@ package ru.itis.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.forms.UserForm;
 import ru.itis.services.UsersService;
@@ -35,7 +37,8 @@ public class RegistrationController{
     //TODO REWORK RETURN
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView getPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @ResponseBody
+    public ResponseEntity<Integer> getPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
@@ -52,19 +55,10 @@ public class RegistrationController{
                 build();
         if(usersService.findByName(username) == null){
             usersService.addUser(userForm);
-            String resultJson = mapper.writeValueAsString(1);
-            response.setStatus(200);
-            response.setContentType("application/json");
-            PrintWriter writer = response.getWriter();
-            writer.write(resultJson);
+            return ResponseEntity.ok(1);
         }
         else {
-            String resultJson = mapper.writeValueAsString(0);
-            response.setStatus(200);
-            response.setContentType("application/json");
-            PrintWriter writer = response.getWriter();
-            writer.write(resultJson);
+            return ResponseEntity.ok(0);
         }
-        return null;
     }
 }

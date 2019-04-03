@@ -2,6 +2,7 @@ package ru.itis.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,18 +23,14 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
 
-    @Autowired
-    private LoginService loginService;
-    @Autowired
-    private ShopService shopService;
-    @Autowired
-    private UsersService usersService;
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private AuthService authService;
+    private final LoginService loginService;
+    private final ShopService shopService;
+    private final UsersService usersService;
+    private final ProductService productService;
+    private final AuthService authService;
 
     private ObjectMapper mapper = new ObjectMapper();
 

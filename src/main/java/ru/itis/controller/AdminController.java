@@ -1,5 +1,6 @@
 package ru.itis.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +21,13 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "/admin")
+@RequiredArgsConstructor
 public class AdminController {
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private AuthService authService;
-    @Autowired
-    private UsersService usersService;
-    @Autowired
-    private ContactService contactService;
+
+    private final ProductService productService;
+    private final AuthService authService;
+    private final UsersService usersService;
+    private final ContactService contactService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getPage(HttpServletRequest request, HttpServletResponse response) {

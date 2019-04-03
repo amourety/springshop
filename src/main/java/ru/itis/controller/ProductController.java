@@ -1,7 +1,9 @@
 package ru.itis.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,18 +17,15 @@ import ru.itis.services.UsersService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private UsersService usersService;
-    @Autowired
-    private ReviewService reviewService;
+    private final ProductService productService;
+    private final UsersService usersService;
+    private final ReviewService reviewService;
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
     public ModelAndView getPage(@PathVariable("id") String stringId, HttpServletRequest req) {
@@ -56,7 +55,8 @@ public class ProductController {
         return modelAndView;
     }
     @RequestMapping(value = "/feedback", method = RequestMethod.POST)
-    public void saveReview(HttpServletRequest req, HttpServletResponse response) throws IOException {
+    @ResponseBody
+    public ResponseEntity<List<Review>> saveReview(HttpServletRequest req, HttpServletResponse response) throws IOException {
         User user2;
         try {
             user2 = usersService.find(usersService.getCurrentUser(req.getCookies()).getId());
@@ -78,27 +78,13 @@ public class ProductController {
         //todo change from void
 //        return "redirect:/products/"+req.getParameter("productId");
         List<Review> reviews = reviewService.getReviewsByProductId(productId);
-        reviews = reviewService.getStringTime(reviews);
-        ObjectMapper mapper = new ObjectMapper();
-        String resultJson = mapper.writeValueAsString(reviews);
-        response.setStatus(200);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        PrintWriter writer = response.getWriter();
-        writer.write(resultJson);
+        return ResponseEntity.ok (reviewService.getStringTime(reviews));
     }
     @RequestMapping(value = "/rating", method = RequestMethod.POST)
-    public void getRating(HttpServletRequest req, HttpServletResponse response) throws IOException {
+    @ResponseBody
+    public ResponseEntity<Product> getRating(HttpServletRequest req, HttpServletResponse response) throws IOException {
         Long id = Long.parseLong(req.getParameter("productId"));
-        Product product = productService.getById(id);
-        System.out.println(product);
-        ObjectMapper mapper = new ObjectMapper();
-        String resultJson = mapper.writeValueAsString(product);
-        response.setStatus(200);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        PrintWriter writer = response.getWriter();
-        writer.write(resultJson);
+        return ResponseEntity.ok(productService.getById(id));
     }
 
     //todo add post request mapping if needed
