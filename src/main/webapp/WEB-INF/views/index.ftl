@@ -109,7 +109,7 @@
                                         <div class="item-dtls">
                                             <h4>
                                                 <a style="font-size: 14px; color: #000000; font-weight: bold;"> ${product.name} </a>
-                                                <a style="font-size: 12px; color: #adabab;"> Rating: ${product.rating} </a>
+                                                <a style="font-size: 12px; color: #adabab;"> Rating: ${product.rating} (${product.countReviews}) </a>
                                             </h4>
                                             <span class="price lblue" id="special"> ${product.price} $</span>
                                         </div>

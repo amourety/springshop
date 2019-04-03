@@ -16,8 +16,9 @@ function search() {
             tableHtml +='<div class="item">';
             tableHtml +='<img class="img-responsive" src="' + data[i].img + '">';
             tableHtml += '<div class="item-dtls">';
-            tableHtml += '<h4><a style="font-size: 14px; color: #000000; font-weight: bold;">' + data[i].name + ' </a></h4>';
+            tableHtml += '<h4><a style="font-size: 14px; color: #000000; font-weight: bold;">' + data[i].name + '</a><a style="font-size: 12px; color: #adabab;"> Rating:' + data[i].rating + '</a></h4>';
             tableHtml += '<span class="price lblue" id = "special">' + data[i].price + '$</span>';
+
             tableHtml += '</div>';
             tableHtml += '<div class="ecom bg-black">';
             tableHtml +='<a class="btn" href="" onclick="doBuying(' + data[i].id + ',' + data[i].price + '); return false;"> Add to cart</a>';

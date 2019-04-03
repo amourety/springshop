@@ -29,7 +29,7 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
 
     //language=SQL
     private static final String SQL_SELECT_ALL_PRODUCTS =
-            "select * from product p join category c2 on p.category = c2.id order by p.id";
+            "select * from product p join category c2 on p.category = c2.id order by p.countreview desc";
 
     //language=SQL
     private static final String SQL_INSERT_PRODUCT =
@@ -50,6 +50,8 @@ public class ProductsRepositoryJdbcTemplateImpl implements ProductsRepository {
             .name(resultSet.getString("name"))
             .price(resultSet.getString("price"))
             .img(resultSet.getString("img"))
+            .about(resultSet.getString("about"))
+            .rating(resultSet.getDouble("rating"))
             .build();
     private RowMapper<Product> productRowMapperCategory = (resultSet, i) -> Product.builder()
             .id(resultSet.getLong("id"))

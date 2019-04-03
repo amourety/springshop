@@ -45,6 +45,7 @@ public class MainController {
             user = null;
         }
         ModelAndView modelAndView = new ModelAndView();
+        System.out.println(products);
         modelAndView.addObject("user", user);
         modelAndView.addObject("products",products);
         modelAndView.addObject("randomproducts", productService.getRandomProducts());
