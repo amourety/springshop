@@ -1,8 +1,6 @@
 package ru.itis.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +40,6 @@ public class ProductController {
         List<Review> reviewList = reviewService.getReviewsByProductId(Long.valueOf(stringId));
         //name of the template is to be changed when we make it
         ModelAndView modelAndView = new ModelAndView("product_page");
-        System.out.println(product);
         if(product == null){
             modelAndView.addObject("product", null);
         }
@@ -65,7 +62,6 @@ public class ProductController {
             user2 = null;
         }
         Long productId = Long.parseLong(    req.getParameter("productId"));
-        System.out.println(productId);
         Review review = Review.builder()
                 .productId(productId)
                 .text(req.getParameter("text"))
@@ -73,13 +69,11 @@ public class ProductController {
                 .username(user2.getName())
                 .rate(Integer.parseInt(req.getParameter("rate")))
                 .build();
-        System.out.println(review.toString());
         reviewService.save(review);
-        //todo change from void
-//        return "redirect:/products/"+req.getParameter("productId");
         List<Review> reviews = reviewService.getReviewsByProductId(productId);
-        return ResponseEntity.ok (reviewService.getStringTime(reviews));
+        return ResponseEntity.ok(reviewService.getStringTime(reviews));
     }
+
     @RequestMapping(value = "/rating", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Product> getRating(HttpServletRequest req, HttpServletResponse response) throws IOException {

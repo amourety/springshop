@@ -1,9 +1,7 @@
 package ru.itis.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,7 +43,6 @@ public class LoginController {
         User user = User.builder().name(name).build();
         req.getSession().setAttribute("user", user);
         Optional<String> optionalCookieValue = loginService.login(loginForm);
-        System.out.println(loginForm);
         if (optionalCookieValue.isPresent()) {
             Cookie cookie = new Cookie("auth", optionalCookieValue.get());
             res.addCookie(cookie);

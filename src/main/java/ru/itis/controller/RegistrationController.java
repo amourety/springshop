@@ -3,6 +3,7 @@ package ru.itis.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,28 +18,24 @@ import ru.itis.services.UsersService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @Controller
 @RequestMapping(value = "/registration")
+@RequiredArgsConstructor
 public class RegistrationController{
-    @Autowired
-    private BCryptPasswordEncoder encoder;
-    @Autowired
-    private UsersService usersService;
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private final BCryptPasswordEncoder encoder;
+    private final UsersService usersService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getPage(){
         return new ModelAndView("registration");
     }
 
-    //TODO REWORK RETURN
-
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Integer> getPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResponseEntity<Integer> getPost(HttpServletRequest request) {
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");

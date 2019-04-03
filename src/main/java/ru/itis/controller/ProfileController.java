@@ -1,5 +1,6 @@
 package ru.itis.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,16 +10,14 @@ import ru.itis.models.User;
 import ru.itis.services.UsersService;
 
 import javax.servlet.http.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
+
 
 @Controller
 @RequestMapping(value = "/profile")
+@RequiredArgsConstructor
 public class ProfileController {
 
-    @Autowired
-    private UsersService usersService;
+    private final UsersService usersService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getPage(HttpServletRequest request, HttpServletResponse response) {

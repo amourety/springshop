@@ -1,7 +1,6 @@
 package ru.itis.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +16,6 @@ import ru.itis.services.UsersService;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -30,7 +28,7 @@ public class AdminController {
     private final ContactService contactService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getPage(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView getPage(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
 
         if (cookies == null) {
@@ -51,12 +49,7 @@ public class AdminController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView getPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Cookie[] cookies = request.getCookies();
-
-        if (cookies == null) {
-            cookies = new Cookie[0];
-        }
+    public ModelAndView getPost(HttpServletRequest request) {
 
         String action = request.getParameter("action");
 
@@ -67,8 +60,6 @@ public class AdminController {
         }
         if (action.equals("addProduct")) {
             Product product = Product.builder().name(request.getParameter("name")).price(request.getParameter("price")).img(request.getParameter("img")).about(request.getParameter("about")).category(request.getParameter("category")).build();
-            System.out.println(product);
-            System.out.println(request.getParameter("check"));
             productService.addProduct(product, request.getParameter("check"));
         }
         if (action.equals("replyMessage")) {

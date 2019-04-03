@@ -1,14 +1,10 @@
 package ru.itis.controller;
 
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +14,6 @@ import ru.itis.services.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -33,7 +28,7 @@ public class JsonController {
     private final ShopService shopService;
 
     @RequestMapping(value = "/img", method = RequestMethod.GET)
-    public void getImg(HttpServletRequest req, HttpServletResponse resp) {
+    public void getImg(HttpServletRequest req) {
         User user;
         try {
             user = usersService.find(usersService.getCurrentUser(req.getCookies()).getId());
@@ -65,13 +60,13 @@ public class JsonController {
         for (User user : users) {
             user.setRole(usersService.getRoleByUser(user));
         }
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return ResponseEntity.ok(users);
     }
 
     @SneakyThrows
     @ResponseBody
     @RequestMapping(value = "/answers.json", method = RequestMethod.GET)
-    public ResponseEntity<List<Contact>> getAnswers(HttpServletRequest request,HttpServletResponse response) {
+    public ResponseEntity<List<Contact>> getAnswers(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
 
         if (cookies == null) {
@@ -90,14 +85,14 @@ public class JsonController {
     @SneakyThrows
     @ResponseBody
     @RequestMapping(value = "/catalog.json", method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> getCatalog(HttpServletRequest request,HttpServletResponse response){
+    public ResponseEntity<List<Product>> getCatalog(){
         return ResponseEntity.ok(productService.findAll());
     }
 
     @SneakyThrows
     @ResponseBody
     @RequestMapping(value = "/messages.json", method = RequestMethod.GET)
-    public ResponseEntity<List<Contact>> getMessages(HttpServletRequest request,HttpServletResponse response){
+    public ResponseEntity<List<Contact>> getMessages(){
         return ResponseEntity.ok(contactService.getMessages());
 
     }
@@ -105,9 +100,8 @@ public class JsonController {
     @SneakyThrows
     @ResponseBody
     @RequestMapping(value = "/main.json", method = RequestMethod.GET)
-    public ResponseEntity<Basket> getData(HttpServletRequest request,HttpServletResponse response){
+    public ResponseEntity<Basket> getData(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
-
         if (cookies == null) {
             cookies = new Cookie[0];
         }
@@ -119,7 +113,7 @@ public class JsonController {
     @SneakyThrows
     @ResponseBody
     @RequestMapping(value = "/orders.json", method = RequestMethod.GET)
-    public ResponseEntity<Basket[]> getUserOrders(HttpServletRequest request,HttpServletResponse response){
+    public ResponseEntity<Basket[]> getUserOrders(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
 
         if (cookies == null) {
